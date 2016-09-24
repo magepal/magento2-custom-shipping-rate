@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 MagePal. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <customshippingrate>
+                <active>0</active>
+                <sallowspecific>0</sallowspecific>
+                <show_on_frontend>0</show_on_frontend>
+                <model>MagePal\CustomShippingRate\Model\Carrier</model>
+                <title>Custom Shipping Rate</title>
+                <shipping_type>a:2:{s:18:"_1473554993884_884";a:2:{s:4:"code";s:6:"pickup";s:5:"title";s:12:"Local Pickup";}s:18:"_1473555017318_318";a:2:{s:4:"code";s:7:"dropoff";s:5:"title";s:14:"Local Drop Off";}}</shipping_type>
+            </customshippingrate>
+        </carriers>
+    </default>
+</config>
