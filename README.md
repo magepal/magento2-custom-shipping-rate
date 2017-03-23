@@ -1,7 +1,7 @@
 ## Custom Shipping Rate for Magento2
 Set custom shipping rates for individual customer, orders and/or delivery areas
 
-####1 - Installation 
+#### 1 - Installation 
 ##### Manual Installation
 Install Gmail Smtp App for Magento2
  * Download the extension
@@ -10,18 +10,18 @@ Install Gmail Smtp App for Magento2
  * Copy the content from the unzip folder
 
 
-#####Using Composer
+##### Using Composer
 
 ```
 composer config repositories.magepal-customshippingrate git git@github.com:magepal/magento2-customshippingrate.git
 composer require magepal/magento2-customshippingrate
 ```
 
-####2 -  Enable Custom Shipping Rate
+#### 2 -  Enable Custom Shipping Rate
  * php -f bin/magento module:enable --clear-static-content MagePal_CustomShippingRate
  * php -f bin/magento setup:upgrade
 
-####3 - Config Custom Shipping Rate
+#### 3 - Config Custom Shipping Rate
 Log into your Magento Admin, then goto Stores -> Configuration -> Sales -> Shipping Methods -> Custom Shipping Rate (Admin Only)
 
 
