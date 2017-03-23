@@ -13,7 +13,6 @@ Install Gmail Smtp App for Magento2
 ##### Using Composer
 
 ```
-composer config repositories.magepal-customshippingrate git git@github.com:magepal/magento2-customshippingrate.git
 composer require magepal/magento2-customshippingrate
 ```
 
