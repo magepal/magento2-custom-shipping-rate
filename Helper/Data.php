@@ -14,37 +14,6 @@ namespace MagePal\CustomShippingRate\Helper;
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
 
-    /**
-     * @var \Magento\Framework\ObjectManagerInterface
-     */
-    protected $_objectManager;
-
-
-    /**
-     * Core store config
-     *
-     * @var \Magento\Framework\App\Config\ScopeConfigInterface
-     */
-    protected $_scopeConfig;
-
-
-    /**
-     * @param \Magento\Framework\App\Helper\Context $context
-     * @param \Magento\Framework\ObjectManagerInterface
-     */
-
-    public function __construct(
-        \Magento\Framework\App\Helper\Context $context,
-        \Magento\Framework\ObjectManagerInterface $objectManager,
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-    )
-    {
-        $this->_scopeConfig = $scopeConfig;
-        $this->_objectManager = $objectManager;
-        parent::__construct($context);
-    }
-
-
     public function getShippingType(){
         $arrayValues = [];
         $configData = $this->getConfigData('shipping_type');
@@ -81,7 +50,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
         $path = 'carriers/' . $code . '/' . $field;
 
-        return $this->_scopeConfig->getValue(
+        return $this->scopeConfig->getValue(
             $path,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
