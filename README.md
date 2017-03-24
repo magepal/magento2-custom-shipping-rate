@@ -24,11 +24,14 @@ composer require magepal/magento2-customshippingrate
 Log into your Magento Admin, then goto Stores -> Configuration -> Sales -> Shipping Methods -> Custom Shipping Rate (Admin Only)
 
 
-### Order Create
+### Admin Order Create
 
 ![image](https://cloud.githubusercontent.com/assets/1415141/18804805/305c80f6-81ce-11e6-8b50-004bb12c35d5.png)
+
+### Frontend
+
+![image](https://cloud.githubusercontent.com/assets/1415141/24302598/9202baf6-1089-11e7-8396-8460a1699fdd.png)
 
 ### Configuration
 
 ![image](https://cloud.githubusercontent.com/assets/1415141/18804815/4573fa96-81ce-11e6-93bf-5b8ece97e237.png)
-
