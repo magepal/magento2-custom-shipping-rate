@@ -3,7 +3,11 @@
     "description":"Magento 2 Custom Shipping Rate",
     "keywords": [
         "magento 2",
-        "shipping"
+        "shipping",
+        "custom shipping module",
+        "shipping rates",
+        "shipping extension",
+        "custom shipping"
     ],
     "require": {
         "php": "~5.6.0|7.0.2|~7.0.6",
