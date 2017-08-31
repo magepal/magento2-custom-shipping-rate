@@ -35,3 +35,8 @@ Log into your Magento Admin, then goto Stores -> Configuration -> Sales -> Shipp
 ### Configuration
 
 ![image](https://cloud.githubusercontent.com/assets/1415141/18804815/4573fa96-81ce-11e6-93bf-5b8ece97e237.png)
+
+
+----
+
+Need help setting up or want to customize this extension to meet your business needs? Please email support@magepal.com and if we like your idea we will add this feature for free or at a discounted rate.
