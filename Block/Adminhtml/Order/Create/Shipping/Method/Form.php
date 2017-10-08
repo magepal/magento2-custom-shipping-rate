@@ -1,9 +1,7 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: renon
- * Date: 9/9/16
- * Time: 6:58 PM
+ * Copyright © 2017 MagePal LLC. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 namespace MagePal\CustomShippingRate\Block\Adminhtml\Order\Create\Shipping\Method;

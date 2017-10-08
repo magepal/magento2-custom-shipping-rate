@@ -17,17 +17,23 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getShippingType(){
         $arrayValues = [];
         $configData = $this->getConfigData('shipping_type');
-        if (is_string($configData) && !empty($configData)) {
-            $arrayValues = array_values(unserialize($configData));
+
+        if (is_string($configData) && !empty($configData) && $configData !== '[]') {
+            if($this->isJson($configData)){
+                $arrayValues = json_decode($configData, true);
+            }
+            else{
+                $arrayValues = array_values(unserialize($configData));
+            }
+
         }
 
-
-        return $arrayValues;
+        return (array)$arrayValues;
     }
 
 
     /**
-     * @return \Psr\Log\LoggerInterface
+     * @return bool
      */
     public function isEnabled()
     {
@@ -54,6 +60,17 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             $path,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
+    }
+
+    /**
+     * Magento 2.2 return json instead of serialize array
+     *
+     * @param   string $string
+     * @return  bool
+     */
+    public function  isJson($string) {
+        json_decode($string);
+        return (json_last_error() == JSON_ERROR_NONE);
     }
 
 

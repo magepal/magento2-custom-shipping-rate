@@ -1,9 +1,11 @@
 <?php
 /**
- * Copyright © 2016 MagePal. All rights reserved.
+ * Copyright © 2017 MagePal LLC. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace MagePal\CustomShippingRate\Block\Adminhtml\System\Config\Form\Field;
+
 use Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray;
 /**
  * Class Locations Backend system config array field renderer
@@ -23,7 +25,7 @@ class ShippingList extends AbstractFieldArray
             'code',
             [
                 'label' => __('Code'),
-                'class' => 'validate-no-empty validate-alphanum'
+                'class' => 'validate-no-empty validate-data'
             ]
         );
         $this->addColumn(
@@ -37,7 +39,7 @@ class ShippingList extends AbstractFieldArray
             'price',
             [
                 'label' => __('Price'),
-                'class' => 'validate-no-empty'
+                'class' => 'validate-no-empty greater-than-equals-to-0'
             ]
         );
         $this->_addAfter = false;

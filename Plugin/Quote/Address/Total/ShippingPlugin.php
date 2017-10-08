@@ -1,6 +1,7 @@
 <?php
 /**
-
+ * Copyright © 2017 MagePal LLC. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 namespace MagePal\CustomShippingRate\Plugin\Quote\Address\Total;
@@ -70,7 +71,9 @@ class ShippingPlugin
                         $address->setShippingMethod($customOption['code']);
                         $address->setShippingAmount($cost);
                         $address->setBaseShippingAmount($cost);
-                        $address->setShippingDescription($customOption['type'] . ' - ' . $rate->getCarrierTitle());
+                        $address->setShippingDescription($rate->getCarrierTitle() . ' - ' . $rate->getMethodTitle());
+                        $total->setShippingAmount($cost);
+                        $total->setBaseShippingAmount($cost);
 
                         break;
                     }

@@ -1,31 +1,24 @@
 <?php
 /**
- * Copyright © 2016 MagePal. All rights reserved.
+ * Copyright © 2017 MagePal LLC. All rights reserved.
  * See COPYING.txt for license details.
  */
 
-namespace MagePal\CustomShippingRate\Block\Adminhtml\System\Config;
+namespace MagePal\CustomShippingRate\Block\Adminhtml\System\Config\Form\Field;
 
-class Version extends \Magento\Config\Block\System\Config\Form\Field
+class Link extends \Magento\Config\Block\System\Config\Form\Field
 {
 
-    /**
-     * @var \Magento\Framework\Module\ModuleListInterface
-     */
-    protected $_moduleList;
 
     /**
      * @param \Magento\Backend\Block\Template\Context $context
-     * @param \Magento\Framework\Module\ModuleListInterface $moduleList
      * @param array $data
      */
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
-        \Magento\Framework\Module\ModuleListInterface $moduleList,
         array $data = []
     ) {
         parent::__construct($context, $data);
-        $this->_moduleList  = $moduleList;
     }
 
     /**
@@ -51,27 +44,12 @@ class Version extends \Magento\Config\Block\System\Config\Form\Field
      */
     protected function _getElementHtml(\Magento\Framework\Data\Form\Element\AbstractElement $element)
     {
-        return 'v' . $this->getVersion();
+        return sprintf('<a href ="%s">%s</a>',
+                    $this->_urlBuilder->getUrl('adminhtml/system_config/edit/section/carriers'),
+                    __('Store > Configuration > Shipping Methods > Custom Shipping Rate')
+        );
     }
 
 
-    /**
-     * Get Module version number
-     *
-     * @return string
-     */
-    public function getVersion(){
-        $moduleInfo = $this->_moduleList->getOne($this->getModuleName());
-        return $moduleInfo['setup_version'];
-    }
 
-    /**
-     * @return string
-     */
-    public function getModuleName()
-    {
-        $classArray = explode('\\', get_class($this));
-
-        return count($classArray) > 2 ? "{$classArray[0]}_{$classArray[1]}" : '';
-    }
 }
