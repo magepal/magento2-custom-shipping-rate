@@ -26,15 +26,15 @@ Log into your Magento Admin, then goto Stores -> Configuration -> Sales -> Shipp
 
 ### Admin Order Create
 
-![image](https://cloud.githubusercontent.com/assets/1415141/24302969/c0565aa6-108a-11e7-9e7c-579b83d8dcbf.png)
+![Magento Custom Shippiing Rate Admin](https://user-images.githubusercontent.com/1415141/31851928-739627c4-b63d-11e7-9015-631047df5e48.gif)
 
 ### Frontend
 
-![image](https://cloud.githubusercontent.com/assets/1415141/24302598/9202baf6-1089-11e7-8396-8460a1699fdd.png)
+![Magento Custom Shippiing Rate Frontend](https://cloud.githubusercontent.com/assets/1415141/24302598/9202baf6-1089-11e7-8396-8460a1699fdd.png)
 
 ### Configuration
 
-![image](https://cloud.githubusercontent.com/assets/1415141/18804815/4573fa96-81ce-11e6-93bf-5b8ece97e237.png)
+![Magento Custom Shippiing Rate Configuration](https://cloud.githubusercontent.com/assets/1415141/18804815/4573fa96-81ce-11e6-93bf-5b8ece97e237.png)
 
 
 ----
