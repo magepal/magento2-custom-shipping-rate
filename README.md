@@ -1,4 +1,8 @@
 ## Custom Shipping Rate for Magento2
+
+[![Total Downloads](https://poser.pugx.org/magepal/magento2-customshippingrate/downloads)](https://packagist.org/packages/magepal/magento2-customshippingrate)
+[![Latest Stable Version](https://poser.pugx.org/magepal/magento2-customshippingrate/v/stable)](https://packagist.org/packages/magepal/magento2-customshippingrate)
+
 Set custom shipping rates for individual customer, orders and/or delivery areas
 
 #### 1 - Installation 
