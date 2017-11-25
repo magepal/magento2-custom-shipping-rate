@@ -3,7 +3,7 @@
 [![Total Downloads](https://poser.pugx.org/magepal/magento2-customshippingrate/downloads)](https://packagist.org/packages/magepal/magento2-customshippingrate)
 [![Latest Stable Version](https://poser.pugx.org/magepal/magento2-customshippingrate/v/stable)](https://packagist.org/packages/magepal/magento2-customshippingrate)
 
-Set your own Custom Shipping Rate on the fly during admin order creation or create predefining shipping type and charges for frontend customers.
+Set your own Custom Shipping Rate on the fly during admin order creation or create predefined shipping type and charges for frontend customers.
 
 ### Admin Order Create
 
