@@ -1,6 +1,6 @@
 {
     "name": "magepal/magento2-customshippingrate",
-    "description":"Set your own Custom Shipping for admin order or create predefining shipping rates for frontend customers",
+    "description":"Set your own Custom Shipping for admin order or create predefined shipping rates for frontend customers",
     "keywords": [
         "magento 2",
         "shipping",
