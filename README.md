@@ -3,19 +3,19 @@
 [![Total Downloads](https://poser.pugx.org/magepal/magento2-customshippingrate/downloads)](https://packagist.org/packages/magepal/magento2-customshippingrate)
 [![Latest Stable Version](https://poser.pugx.org/magepal/magento2-customshippingrate/v/stable)](https://packagist.org/packages/magepal/magento2-customshippingrate)
 
-Set your own Custom Shipping Rate on the fly during admin order creation or create predefined shipping type and charges for frontend customers.
+This extension provides store owners the ability to add custom shipping cost for every admin order or create predefined shipping methods for frontend customers.
 
-### Admin Order Create
+### Custom Shipping Price for Admin Order
 
-![Magento Custom Shippiing Rate Admin](https://user-images.githubusercontent.com/1415141/31851928-739627c4-b63d-11e7-9015-631047df5e48.gif)
+![Magento2 Custom Shippiing Rate Admin](https://user-images.githubusercontent.com/1415141/31851928-739627c4-b63d-11e7-9015-631047df5e48.gif)
 
-### Frontend
+### Frontend Shipping Methods
 
-![Magento Custom Shippiing Rate Frontend](https://cloud.githubusercontent.com/assets/1415141/24302598/9202baf6-1089-11e7-8396-8460a1699fdd.png)
+![Magento2 Custom Shippiing Method Frontend](https://cloud.githubusercontent.com/assets/1415141/24302598/9202baf6-1089-11e7-8396-8460a1699fdd.png)
 
-### Configuration
+### Shipping Configuration
 
-![Magento Custom Shippiing Rate Configuration](https://cloud.githubusercontent.com/assets/1415141/18804815/4573fa96-81ce-11e6-93bf-5b8ece97e237.png)
+![Magento2 Custom Shippiing price Configuration](https://cloud.githubusercontent.com/assets/1415141/18804815/4573fa96-81ce-11e6-93bf-5b8ece97e237.png)
 
 ## Installation
 
