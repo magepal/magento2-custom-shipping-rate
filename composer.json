@@ -1,12 +1,17 @@
 {
     "name": "magepal/magento2-customshippingrate",
-    "description":"Set your own Custom Shipping for admin order or create predefined shipping rates for frontend customers",
+    "description":"Set your own Custom Shipping rates for admin order or create predefined shipping methods for frontend customers",
     "keywords": [
         "magento 2",
+        "magento2",
         "shipping",
+        "magento2 how to create custom shipping method",
+        "magento2 shipping module",
+        "magento2 shipping extension",
         "custom shipping module",
         "shipping rates",
         "shipping extension",
+        "shipping method",
         "custom shipping"
     ],
     "require": {
