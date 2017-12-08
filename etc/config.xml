@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © 2017 MagePal LLC. All rights reserved.
+ * Copyright © MagePal LLC. All rights reserved.
  * See COPYING.txt for license details.
  */
 -->
@@ -14,7 +14,6 @@
                 <show_on_frontend>0</show_on_frontend>
                 <model>MagePal\CustomShippingRate\Model\Carrier</model>
                 <title>Custom Shipping Rate</title>
-                <shipping_type>a:2:{s:18:"_1473554993884_884";a:2:{s:4:"code";s:6:"pickup";s:5:"title";s:12:"Local Pickup";}s:18:"_1473555017318_318";a:2:{s:4:"code";s:7:"dropoff";s:5:"title";s:14:"Local Drop Off";}}</shipping_type>
             </customshippingrate>
         </carriers>
     </default>
