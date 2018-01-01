@@ -6,7 +6,6 @@
 
 namespace MagePal\CustomShippingRate\Block\Adminhtml\Order\Create\Shipping\Method;
 
-
 class Form extends \Magento\Sales\Block\Adminhtml\Order\Create\Shipping\Method\Form
 {
 
@@ -15,7 +14,8 @@ class Form extends \Magento\Sales\Block\Adminhtml\Order\Create\Shipping\Method\F
      *
      * @return string
      */
-    public function getActiveCustomShippingRateMethod(){
+    public function getActiveCustomShippingRateMethod()
+    {
         $rate = $this->getActiveMethodRate();
         return $rate && $rate->getCarrier() == \MagePal\CustomShippingRate\Model\Carrier::CODE ? $rate->getMethod() : '';
     }
@@ -25,20 +25,20 @@ class Form extends \Magento\Sales\Block\Adminhtml\Order\Create\Shipping\Method\F
      *
      * @return string
      */
-    public function getActiveCustomShippingRatePrice(){
+    public function getActiveCustomShippingRatePrice()
+    {
         $rate = $this->getActiveMethodRate();
         return $this->getActiveCustomShippingRateMethod() && $rate->getPrice() ? $rate->getPrice() * 1 : '';
     }
-
 
     /**
      * Custom shipping rate
      *
      * @return string
      */
-    public function isCustomShippingRateActive(){
+    public function isCustomShippingRateActive()
+    {
         $rate = $this->getActiveMethodRate();
         return $rate && $rate->getCarrier() == \MagePal\CustomShippingRate\Model\Carrier::CODE ? true : false;
     }
-
 }

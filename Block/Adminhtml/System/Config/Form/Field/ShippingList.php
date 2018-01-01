@@ -7,6 +7,7 @@
 namespace MagePal\CustomShippingRate\Block\Adminhtml\System\Config\Form\Field;
 
 use Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray;
+
 /**
  * Class Locations Backend system config array field renderer
  */

@@ -6,7 +6,6 @@
 
 namespace MagePal\CustomShippingRate\Plugin\Quote\Address\Total;
 
-
 class ShippingPlugin
 {
 
@@ -19,7 +18,6 @@ class ShippingPlugin
      * @param \Magento\Quote\Model\Quote
      */
     protected $_quote;
-
 
     /**
      * @param \MagePal\CustomShippingRate\Helper\Data $customShippingRateHelper
@@ -44,11 +42,10 @@ class ShippingPlugin
         \Magento\Quote\Model\Quote $quote,
         \Magento\Quote\Api\Data\ShippingAssignmentInterface $shippingAssignment,
         \Magento\Quote\Model\Quote\Address\Total $total
-    ){
-
+    ) {
         $returnValue = $proceed($quote, $shippingAssignment, $total);
 
-        if(!$this->_customShippingRateHelper->isEnabled()){
+        if (!$this->_customShippingRateHelper->isEnabled()) {
             return $returnValue;
         }
 
@@ -60,7 +57,7 @@ class ShippingPlugin
         if (strpos($method, \MagePal\CustomShippingRate\Model\Carrier::CODE) !== false) {
             $customOption = $this->getCustomShippingJsonToArray($method);
 
-            if($customOption && strpos($method, $customOption['code']) !== false){
+            if ($customOption && strpos($method, $customOption['code']) !== false) {
                 foreach ($address->getAllShippingRates() as $rate) {
                     if ($rate->getCode() == $customOption['code']) {
                         $cost = $customOption['rate'];
@@ -79,7 +76,6 @@ class ShippingPlugin
                     }
                 }
             }
-
         }
 
         return $returnValue;
@@ -99,18 +95,16 @@ class ShippingPlugin
 
         $jsonToArray = (array)json_decode($json, true);
 
-        if(!$json || count($jsonToArray) != 3){
+        if (!$json || count($jsonToArray) != 3) {
             $json = $this->getQuote()->getCustomShippingRateJson();
 
-            if($json){
+            if ($json) {
                 $jsonToArray = (array)json_decode($json, true);
             }
-
         }
 
-
-        if(is_array($jsonToArray) && count($jsonToArray) == 3){
-            foreach($jsonToArray as $key => $value){
+        if (is_array($jsonToArray) && count($jsonToArray) == 3) {
+            foreach ($jsonToArray as $key => $value) {
                 $customOption[$key] = $value;
             }
 
@@ -119,7 +113,6 @@ class ShippingPlugin
         }
 
         return false;
-
     }
 
     /**
@@ -139,5 +132,4 @@ class ShippingPlugin
     {
         return $this->_quote;
     }
-
 }

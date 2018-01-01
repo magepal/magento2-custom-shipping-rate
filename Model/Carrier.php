@@ -6,10 +6,8 @@
 
 namespace MagePal\CustomShippingRate\Model;
 
-
-use Magento\Shipping\Model\Carrier\AbstractCarrier;
 use Magento\Quote\Model\Quote\Address\RateRequest;
-
+use Magento\Shipping\Model\Carrier\AbstractCarrier;
 
 class Carrier extends AbstractCarrier implements \Magento\Shipping\Model\Carrier\CarrierInterface
 {
@@ -55,7 +53,6 @@ class Carrier extends AbstractCarrier implements \Magento\Shipping\Model\Carrier
      */
     protected $_customShippingRateHelper;
 
-
     /**
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      * @param \Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory $rateErrorFactory
@@ -89,7 +86,6 @@ class Carrier extends AbstractCarrier implements \Magento\Shipping\Model\Carrier
         $this->_customShippingRateHelper = $customShippingRateHelper;
     }
 
-
     /**
      * Collect and get rates
      *
@@ -104,8 +100,7 @@ class Carrier extends AbstractCarrier implements \Magento\Shipping\Model\Carrier
             return $result;
         }
 
-
-        foreach($this->_customShippingRateHelper->getShippingType() as $shippingType){
+        foreach ($this->_customShippingRateHelper->getShippingType() as $shippingType) {
             $rate = $this->_rateMethodFactory->create();
             $rate->setCarrier($this->_code);
             $rate->setCarrierTitle($this->getConfigData('title'));
@@ -120,21 +115,18 @@ class Carrier extends AbstractCarrier implements \Magento\Shipping\Model\Carrier
         return $result;
     }
 
-     /**
-     * Get allowed shipping methods
-     *
-     * @return array
-     */
+    /**
+    * Get allowed shipping methods
+    *
+    * @return array
+    */
     public function getAllowedMethods()
     {
         return [$this->getCarrierCode() => __($this->getConfigData('name'))];
     }
 
-
     public function isTrackingAvailable()
     {
         return false;
     }
-
-
 }

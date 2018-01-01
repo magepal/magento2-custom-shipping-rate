@@ -13,12 +13,16 @@
     <div id="order-shipping-method-choose" class="control" style="display:none">
         <dl class="admin__order-shipment-methods">
         <?php foreach ($_shippingRateGroups as $code => $_rates): ?>
-            <?php if($code == \MagePal\CustomShippingRate\Model\Carrier::CODE && !$block->isCustomShippingRateActive()) continue; ?>
+            <?php if ($code == \MagePal\CustomShippingRate\Model\Carrier::CODE && !$block->isCustomShippingRateActive()) {
+    continue;
+} ?>
             <dt class="admin__order-shipment-methods-title"><?php echo $block->escapeHtml($block->getCarrierName($code)) ?></dt>
             <dd class="admin__order-shipment-methods-options">
                 <ul class="admin__order-shipment-methods-options-list">
                 <?php foreach ($_rates as $_rate): ?>
-                    <?php if($code == \MagePal\CustomShippingRate\Model\Carrier::CODE && $_rate->getMethod() != $block->getActiveCustomShippingRateMethod()) continue; ?>
+                    <?php if ($code == \MagePal\CustomShippingRate\Model\Carrier::CODE && $_rate->getMethod() != $block->getActiveCustomShippingRateMethod()) {
+    continue;
+} ?>
                     <?php $_radioProperty = 'name="order[shipping_method]" type="radio" onclick="order.setShippingMethod(this.value)"' ?>
                     <?php $_code = $_rate->getCode() ?>
                     <li class="admin__field-option">
@@ -52,7 +56,7 @@
             </dd>
         <?php endforeach; ?>
             <?php /*------- Start MagePal --------*/ ?>
-            <?php if($this->helper('MagePal\CustomShippingRate\Helper\Data')->isEnabled()): ?>
+            <?php if ($this->helper('MagePal\CustomShippingRate\Helper\Data')->isEnabled()): ?>
                 <dt class="admin__order-shipment-methods-title">
                     <hr/>
                 </dt>
@@ -66,7 +70,7 @@
 
                                 <select id="custom-shipment-title" class="admin__control-select required-entry">
                                     <!--option>-- please choose --</option-->
-                                    <?php foreach($this->helper('MagePal\CustomShippingRate\Helper\Data')->getShippingType() as $shippingType) :?>
+                                    <?php foreach ($this->helper('MagePal\CustomShippingRate\Helper\Data')->getShippingType() as $shippingType) :?>
                                         <option value="<?php echo $shippingType['code'] ?>" <?php echo $block->getActiveCustomShippingRateMethod() == $shippingType['code'] ? ' selected' : '' ?>>
                                             <?php echo __($shippingType['title']); ?>
                                         </option>
