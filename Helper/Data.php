@@ -1,12 +1,7 @@
 <?php
 /**
- * MagePal_AdminSalesOrderViewButton Magento component
- *
- * @category    MagePal
- * @package     MagePal_AdminSalesOrderViewButton
- * @author      MagePal Team <info@magepal.com>
- * @copyright   MagePal (http://www.magepal.com)
- * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * Copyright © MagePal LLC. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 namespace MagePal\CustomShippingRate\Helper;
