@@ -7,15 +7,15 @@ This extension provides store owners the ability to add custom shipping cost for
 
 ### Custom Shipping Price for Admin Order
 
-![Magento2 Custom Shippiing Rate Admin](https://user-images.githubusercontent.com/1415141/31851928-739627c4-b63d-11e7-9015-631047df5e48.gif)
+![Magento2 Custom Shippiing Rate Admin](https://image.ibb.co/ijTPtH/Custom_Shipping_Rate_for_Magento2_by_Magepal.gif)
 
 ### Frontend Shipping Methods
 
-![Magento2 Custom Shippiing Method Frontend](https://cloud.githubusercontent.com/assets/1415141/24302598/9202baf6-1089-11e7-8396-8460a1699fdd.png)
+![Magento2 Custom Shippiing Method Frontend](https://image.ibb.co/hjHHDH/Custom_Shipping_Rate_for_Magento2_frontend.png)
 
 ### Shipping Configuration
 
-![Magento2 Custom Shippiing price Configuration](https://cloud.githubusercontent.com/assets/1415141/18804815/4573fa96-81ce-11e6-93bf-5b8ece97e237.png)
+![Magento2 Custom Shippiing price Configuration](https://image.ibb.co/fuxv0x/Custom_Shipping_Rate_for_Magento2_backend.png)
 
 ## Installation
 
