@@ -17,7 +17,7 @@ This extension provides store owners the ability to add custom shipping cost for
 
 ### Shipping Configuration
 
-![Magento2 Custom Shippiing price Configuration](https://image.ibb.co/fuxv0x/Custom_Shipping_Rate_for_Magento2_backend.png)
+![Magento2 Custom Shippiing price Configuration](![image](https://user-images.githubusercontent.com/1415141/38053884-457a6ba6-32a3-11e8-86bd-97245b7a0356.png)
 
 ## Installation
 
