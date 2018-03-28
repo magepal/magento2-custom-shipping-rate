@@ -29,7 +29,7 @@ This extension provides store owners the ability to add custom shipping cost for
 composer require magepal/magento2-customshippingrate
 ```
 
-##### Manual Installation
+##### Manual Installation (not recommended)
 To install Custom Shipping Rate for Magento2
  * Download the extension
  * Unzip the file
@@ -57,4 +57,4 @@ If you encounter any problems or bugs, please open an issue on [GitHub](https://
 
 Need help setting up or want to customize this extension to meet your business needs? Please email support@magepal.com and if we like your idea we will add this feature for free or at a discounted rate.
 
-© MagePal LLC.
+© MagePal LLC. | www.magepal.com

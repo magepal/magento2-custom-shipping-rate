@@ -2,12 +2,41 @@
 /**
  * Copyright © MagePal LLC. All rights reserved.
  * See COPYING.txt for license details.
+ * http://www.magepal.com | support@magepal.com
  */
 
 namespace MagePal\CustomShippingRate\Helper;
 
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
+    protected $codes = [
+        'code' => [
+            'label' => 'Code',
+            'class' => 'validate-no-empty validate-data',
+            'default' => ''
+        ],
+        'title' => [
+            'label' => 'Title',
+            'class' => 'validate-no-empty',
+            'default' => ''
+        ],
+        'price' => [
+            'label' => 'Price',
+            'class' => 'validate-no-empty greater-than-equals-to-0',
+            'default' => ''
+        ],
+        'sort_order' => [
+            'label' => 'Admin Sort',
+            'class' => 'validate-no-empty greater-than-equals-to-0',
+            'default' => 99
+        ]
+    ];
+
+    protected $headerTemplate;
+
+    /**
+     * @return array|mixed
+     */
     public function getShippingType()
     {
         $arrayValues = [];
@@ -15,13 +44,23 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
         if (is_string($configData) && !empty($configData) && $configData !== '[]') {
             if ($this->isJson($configData)) {
-                $arrayValues = json_decode($configData, true);
+                $arrayValues = (array) json_decode($configData, true);
             } else {
-                $arrayValues = array_values(unserialize($configData));
+                $arrayValues = (array) array_values(unserialize($configData));
             }
         }
 
-        return (array)$arrayValues;
+        $arrayValues = $this->shippingArrayObject($arrayValues);
+
+        usort($arrayValues, function ($a, $b) {
+            if (array_key_exists('sort_order', $a)) {
+                return $a['sort_order'] - $b['sort_order'];
+            } else {
+                return 0;
+            }
+        });
+
+        return $arrayValues;
     }
 
     /**
@@ -63,5 +102,44 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         json_decode($string);
         return (json_last_error() == JSON_ERROR_NONE);
+    }
+
+    public function getHeaderTemplate()
+    {
+        if (!$this->headerTemplate) {
+            $this->headerTemplate = [];
+
+            foreach ($this->getHeaderColumns() as $key => $column) {
+                $this->headerTemplate[$key] = $column['default'];
+            }
+        }
+
+        return $this->headerTemplate;
+    }
+
+    /**
+     * @return array
+     */
+    public function getHeaderColumns()
+    {
+        return $this->codes;
+    }
+
+    /**
+     * @param $values
+     * @return mixed
+     */
+    public function shippingArrayObject($values)
+    {
+        //fix existing options
+        $requiredFields = $this->getHeaderTemplate();
+
+        if (is_array($values)) {
+            foreach ($values as $key => &$row) {
+                $row = array_merge($requiredFields, $row);
+            }
+        }
+
+        return $values;
     }
 }

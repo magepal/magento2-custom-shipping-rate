@@ -2,6 +2,7 @@
 /**
  * Copyright © MagePal LLC. All rights reserved.
  * See COPYING.txt for license details.
+ * http://www.magepal.com | support@magepal.com
  */
 
 namespace MagePal\CustomShippingRate\Block\Adminhtml\System\Config\Form\Composer;
@@ -25,9 +26,11 @@ class Version extends \Magento\Config\Block\System\Config\Form\Field
     protected $readFactory;
 
     /**
+     * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Framework\App\DeploymentConfig $deploymentConfig
      * @param \Magento\Framework\Component\ComponentRegistrarInterface $componentRegistrar
      * @param \Magento\Framework\Filesystem\Directory\ReadFactory $readFactory
+     * @param array $data
      */
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
