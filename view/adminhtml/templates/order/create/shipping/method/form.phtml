@@ -2,6 +2,7 @@
 /**
  * Copyright © MagePal LLC. All rights reserved.
  * See COPYING.txt for license details.
+ * http://www.magepal.com | support@magepal.com
  */
 
 // @codingStandardsIgnoreFile
@@ -78,7 +79,7 @@
                                 </select>
                                 <input id="custom-shipment-rate" type="text" style="width:75px; padding:3px;" placeholder="9.99" value="<?php echo $block->getActiveCustomShippingRatePrice() ?>" class="input-text item-price required-entry" />
                                 <button id="custom-shipping-button" type="button" class="scalable "
-                                        onclick="order.setShippingMethod(getCustomShippingCost())" ><span>Set</span></button>
+                                        onclick="order.setShippingMethod(getCustomShippingCost())" ><span><?= __('Set') ?></span></button>
                             </p>
 
                         </li>
