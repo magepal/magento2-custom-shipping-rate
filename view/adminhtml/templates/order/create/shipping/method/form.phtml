@@ -9,21 +9,15 @@
 
 ?>
 <?php /** @var $block \Magento\Sales\Block\Adminhtml\Order\Create\Shipping\Method\Form */ ?>
-<?php $_shippingRateGroups = $block->getShippingRates(); ?>
+<?php $_shippingRateGroups = $block->getGroupShippingRates(); ?>
 <?php if ($_shippingRateGroups): ?>
     <div id="order-shipping-method-choose" class="control" style="display:none">
         <dl class="admin__order-shipment-methods">
         <?php foreach ($_shippingRateGroups as $code => $_rates): ?>
-            <?php if ($code == \MagePal\CustomShippingRate\Model\Carrier::CODE && !$block->isCustomShippingRateActive()) {
-    continue;
-} ?>
             <dt class="admin__order-shipment-methods-title"><?php echo $block->escapeHtml($block->getCarrierName($code)) ?></dt>
             <dd class="admin__order-shipment-methods-options">
                 <ul class="admin__order-shipment-methods-options-list">
                 <?php foreach ($_rates as $_rate): ?>
-                    <?php if ($code == \MagePal\CustomShippingRate\Model\Carrier::CODE && $_rate->getMethod() != $block->getActiveCustomShippingRateMethod()) {
-    continue;
-} ?>
                     <?php $_radioProperty = 'name="order[shipping_method]" type="radio" onclick="order.setShippingMethod(this.value)"' ?>
                     <?php $_code = $_rate->getCode() ?>
                     <li class="admin__field-option">
