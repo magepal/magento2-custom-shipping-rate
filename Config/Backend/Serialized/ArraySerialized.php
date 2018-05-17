@@ -7,7 +7,6 @@
 
 namespace MagePal\CustomShippingRate\Config\Backend\Serialized;
 
-use Magento\Framework\Serialize\Serializer\Json;
 
 class ArraySerialized extends \Magento\Config\Model\Config\Backend\Serialized\ArraySerialized
 {
@@ -23,7 +22,6 @@ class ArraySerialized extends \Magento\Config\Model\Config\Backend\Serialized\Ar
      * @param \Magento\Framework\Data\Collection\AbstractDb|null $resourceCollection
      * @param \MagePal\CustomShippingRate\Helper\Data $helperData
      * @param array $data
-     * @param Json|null $serializer
      */
     public function __construct(
         \Magento\Framework\Model\Context $context,
@@ -33,8 +31,7 @@ class ArraySerialized extends \Magento\Config\Model\Config\Backend\Serialized\Ar
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         \MagePal\CustomShippingRate\Helper\Data $helperData,
-        array $data = [],
-        Json $serializer = null
+        array $data = []
     ) {
         parent::__construct(
             $context,
@@ -43,8 +40,7 @@ class ArraySerialized extends \Magento\Config\Model\Config\Backend\Serialized\Ar
             $cacheTypeList,
             $resource,
             $resourceCollection,
-            $data,
-            $serializer
+            $data
         );
 
         $this->helper = $helperData;
