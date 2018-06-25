@@ -7,7 +7,7 @@
 
 Our Magento2 extension provides store owners the ability to apply a custom shipping charges when creating new admin order or to create predefined flat rate shipping methods for frontend customers.
 
-This free extension is essential for businesses that do a lot of phone orders and want to offer special customer different shipping cost. During admin order creation you can simply enter the custom shipping amount for a particular order instead of choosing a predefined standard shipping rate.
+This free extension is essential for businesses that do a lot of phone orders and want to offer special customer different shipping cost. During admin order creation you can simply enter the custom shipping amount for a particular order instead of choosing a predefined standard shipping rates.
 
 ### Custom Shipping Price for Admin Order
 
