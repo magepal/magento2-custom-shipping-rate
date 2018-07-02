@@ -7,7 +7,6 @@
 
 namespace MagePal\CustomShippingRate\Config\Backend\Serialized;
 
-
 class ArraySerialized extends \Magento\Config\Model\Config\Backend\Serialized\ArraySerialized
 {
     protected $helper;

@@ -9,7 +9,6 @@ namespace MagePal\CustomShippingRate\Block\Adminhtml\Order\Create\Shipping\Metho
 
 class Form extends \Magento\Sales\Block\Adminhtml\Order\Create\Shipping\Method\Form
 {
-
     protected $activeMethodRate;
 
     /**
@@ -41,7 +40,7 @@ class Form extends \Magento\Sales\Block\Adminhtml\Order\Create\Shipping\Method\F
      */
     public function isCustomShippingRateActive()
     {
-        if(empty($this->activeMethodRate)){
+        if (empty($this->activeMethodRate)) {
             $this->activeMethodRate = $this->getActiveMethodRate();
         }
 
@@ -55,17 +54,15 @@ class Form extends \Magento\Sales\Block\Adminhtml\Order\Create\Shipping\Method\F
      */
     public function getGroupShippingRates()
     {
-
         $rates = $this->getShippingRates();
 
-        if(array_key_exists(\MagePal\CustomShippingRate\Model\Carrier::CODE, $rates)){
-            if (!$this->isCustomShippingRateActive()){
-                    unset($rates[\MagePal\CustomShippingRate\Model\Carrier::CODE]);
-            }
-            else {
+        if (array_key_exists(\MagePal\CustomShippingRate\Model\Carrier::CODE, $rates)) {
+            if (!$this->isCustomShippingRateActive()) {
+                unset($rates[\MagePal\CustomShippingRate\Model\Carrier::CODE]);
+            } else {
                 $activeRateMethod = $this->getActiveCustomShippingRateMethod();
-                foreach($rates[\MagePal\CustomShippingRate\Model\Carrier::CODE] as $key => $rate){
-                    if($rate->getMethod() != $activeRateMethod){
+                foreach ($rates[\MagePal\CustomShippingRate\Model\Carrier::CODE] as $key => $rate) {
+                    if ($rate->getMethod() != $activeRateMethod) {
                         unset($rates[\MagePal\CustomShippingRate\Model\Carrier::CODE][$key]);
                     }
                 }
