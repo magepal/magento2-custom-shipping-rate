@@ -62,14 +62,19 @@ class ShippingPlugin
                 foreach ($address->getAllShippingRates() as $rate) {
                     if ($rate->getCode() == $customOption['code']) {
                         $cost = $customOption['rate'];
+                        $description = trim($customOption['description']);
+
+                        //Empty by default. Use in third-party modules
+                        if (empty($description) || strlen($description) < 2) {
+                            $description = $rate->getCarrierTitle() . ' - ' . $rate->getMethodTitle();
+                        }
 
                         $rate->setPrice($cost);
-                        //$rate->setMethodTitle($customOption['type']);
-
+                        $rate->setMethodTitle($description);
                         $address->setShippingMethod($customOption['code']);
                         $address->setShippingAmount($cost);
                         $address->setBaseShippingAmount($cost);
-                        $address->setShippingDescription($rate->getCarrierTitle() . ' - ' . $rate->getMethodTitle());
+                        $address->setShippingDescription($description);
                         $total->setShippingAmount($cost);
                         $total->setBaseShippingAmount($cost);
 
@@ -91,7 +96,8 @@ class ShippingPlugin
         $customOption = [
             'code' => '',
             'rate' => 0,
-            'type' => ''
+            'type' => '',
+            'description' => ''
         ];
 
         $jsonToArray = (array)json_decode($json, true);
@@ -104,7 +110,7 @@ class ShippingPlugin
             }
         }
 
-        if (is_array($jsonToArray) && count($jsonToArray) == 3) {
+        if (is_array($jsonToArray) && count($jsonToArray) == 4) {
             foreach ($jsonToArray as $key => $value) {
                 $customOption[$key] = $value;
             }
