@@ -102,7 +102,7 @@ class ShippingPlugin
 
         $jsonToArray = (array)json_decode($json, true);
 
-        if (!$json || count($jsonToArray) != 3) {
+        if (!$json || count($jsonToArray) != 4) {
             $json = $this->getQuote()->getCustomShippingRateJson();
 
             if ($json) {

@@ -150,9 +150,11 @@ require(['prototype'], function(){
 <script type="text/javascript">
     function getCustomShippingCost(){
         var rate = $('custom-shipment-rate').value;
-        var code  = $('custom-shipment-title')[$('custom-shipment-title').selectedIndex].value;
+        var type  = $('custom-shipment-title')[$('custom-shipment-title').selectedIndex].value;
+        var code = 'customshippingrate_' + type;
+        var desc = '';
 
-        var val = '{"rate" : "' + rate + '", "code" : "customshippingrate_' + code  + '", "type" : "' + code + '"}';
+        var val = '{"rate" : "' + rate + '", "code" : "' + code  + '", "type" : "' + type + '", "description" : "' + desc + '"}';
 
         return val;
     }
