@@ -50,7 +50,7 @@ Log into your Magento Admin, then goto Stores -> Configuration -> Sales -> Shipp
 
 Contribution
 ---
-Want to contribute to this extension? The quickest way is to open a [pull request on GitHub](https://help.github.com/articles/using-pull-requests).
+Want to contribute to this extension? The quickest way is to open a [pull request on GitHub](https://help.github.com/articles/using-pull-requests). For fast Premium Support visit our [Custom Shipping Rates](https://www.magepal.com/magento2/extensions/custom-shipping-rates-for-magento-2.html?utm_source=Custom%20Shipping%20Rates&utm_medium=Premium%20Support) product page for detail.
 
 
 Support
