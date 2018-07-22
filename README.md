@@ -44,7 +44,7 @@ To install Custom Shipping Rate for Magento2
  * php -f bin/magento module:enable --clear-static-content MagePal_CustomShippingRate
  * php -f bin/magento setup:upgrade
 
-#### Step 3 - Config Custom Shipping Rate
+#### Step 3 - How to Configure Custom Shipping Rate
 Log into your Magento Admin, then goto Stores -> Configuration -> Sales -> Shipping Methods -> Custom Shipping Rate
 
 
