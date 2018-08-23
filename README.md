@@ -18,6 +18,7 @@ Instead of using complex shipping table rates, our extension simplifies your che
 ![Magento2 Custom Shippiing Method Frontend](https://image.ibb.co/hjHHDH/Custom_Shipping_Rate_for_Magento2_frontend.png)
 
 ### How to Configure Magento Shipping Rate
+Setting up our shipping method is as simple as entering four options for your different rate.
 
 ![Magento2 Custom Shippiing price Configuration](https://user-images.githubusercontent.com/1415141/38053884-457a6ba6-32a3-11e8-86bd-97245b7a0356.png)
 
