@@ -7,18 +7,19 @@
 
 namespace MagePal\CustomShippingRate\Plugin\Quote\Address\Total;
 
+use Magento\Quote\Api\Data\ShippingAssignmentInterface;
+use Magento\Quote\Model\Quote;
+use Magento\Quote\Model\Quote\Address\Total;
+use Magento\Quote\Model\Quote\Address\Total\Shipping;
+use \MagePal\CustomShippingRate\Model\Carrier;
+use \Magento\Quote\Model\Quote\Address;
+
 class ShippingPlugin
 {
-
     /**
      * @var \MagePal\CustomShippingRate\Helper\Data
      */
     protected $_customShippingRateHelper;
-
-    /**
-     * @param \Magento\Quote\Model\Quote
-     */
-    protected $_quote;
 
     /**
      * @param \MagePal\CustomShippingRate\Helper\Data $customShippingRateHelper
@@ -30,113 +31,113 @@ class ShippingPlugin
     }
 
     /**
-     * @param \Magento\Quote\Model\Quote\Address\Total\Shipping $subject
+     * @param Shipping $subject
      * @param callable $proceed
-     * @param \Magento\Quote\Model\Quote $quote
-     * @param \Magento\Quote\Api\Data\ShippingAssignmentInterface $shippingAssignment
-     * @param \Magento\Quote\Model\Quote\Address\Total $total
+     * @param Quote $quote
+     * @param ShippingAssignmentInterface $shippingAssignment
+     * @param Total $total
      * @return mixed
      */
     public function aroundCollect(
-        \Magento\Quote\Model\Quote\Address\Total\Shipping $subject,
+        Shipping $subject,
         callable $proceed,
-        \Magento\Quote\Model\Quote $quote,
-        \Magento\Quote\Api\Data\ShippingAssignmentInterface $shippingAssignment,
-        \Magento\Quote\Model\Quote\Address\Total $total
+        Quote $quote,
+        ShippingAssignmentInterface $shippingAssignment,
+        Total $total
     ) {
-        $returnValue = $proceed($quote, $shippingAssignment, $total);
 
-        if (!$this->_customShippingRateHelper->isEnabled()) {
-            return $returnValue;
+        $shipping = $shippingAssignment->getShipping();
+        $address = $shipping->getAddress();
+        $method = $address->getShippingMethod();
+
+        if (!$this->_customShippingRateHelper->isEnabled()
+            || $address->getAddressType() != Address::ADDRESS_TYPE_SHIPPING
+            || strpos($method, Carrier::CODE) === false
+        ) {
+            return $proceed($quote, $shippingAssignment, $total);
         }
 
-        $this->setQuote($quote);
+        $customShippingOption = $this->getCustomShippingJsonToArray($method, $address);
 
-        $address = $shippingAssignment->getShipping()->getAddress();
-        $method = $shippingAssignment->getShipping()->getMethod();
+        if ($customShippingOption && strpos($method, $customShippingOption['code']) !== false) {
+            //update shipping code
+            $shipping->setMethod($customShippingOption['code']);
+            $address->setShippingMethod($customShippingOption['code']);
+            $this->updateCustomRate($address, $customShippingOption);
+        }
 
-        if (strpos($method, \MagePal\CustomShippingRate\Model\Carrier::CODE) !== false) {
-            $customOption = $this->getCustomShippingJsonToArray($method);
+        return $proceed($quote, $shippingAssignment, $total);
+    }
 
-            if ($customOption && strpos($method, $customOption['code']) !== false) {
-                foreach ($address->getAllShippingRates() as $rate) {
-                    if ($rate->getCode() == $customOption['code']) {
-                        $cost = $customOption['rate'];
-                        $description = trim($customOption['description']);
+    /**
+     * @param $address
+     * @param $customShippingOption
+     */
+    protected function updateCustomRate($address, $customShippingOption)
+    {
+        foreach ($address->getAllShippingRates() as $rate) {
+            if ($rate->getCode() == $customShippingOption['code']) {
+                $cost = (float) $customShippingOption['rate'];
+                $description = trim($customShippingOption['description']);
 
-                        //Empty by default. Use in third-party modules
-                        if (empty($description) || strlen($description) < 2) {
-                            $description = $rate->getCarrierTitle() . ' - ' . $rate->getMethodTitle();
-                        }
-
-                        $rate->setPrice($cost);
-                        $rate->setMethodTitle($description);
-                        $address->setShippingMethod($customOption['code']);
-                        $address->setShippingAmount($cost);
-                        $address->setBaseShippingAmount($cost);
-                        $address->setShippingDescription($description);
-                        $total->setShippingAmount($cost);
-                        $total->setBaseShippingAmount($cost);
-
-                        break;
-                    }
+                $address->setShippingAmount($cost);
+                $rate->setPrice($cost);
+                //Empty by default. Use in third-party modules
+                if (!empty($description) || strlen($description) > 2) {
+                    $rate->setMethodTitle($description);
                 }
+
+                break;
             }
         }
-
-        return $returnValue;
     }
 
     /**
      * @param $json
+     * @param $address
      * @return array|bool
      */
-    private function getCustomShippingJsonToArray($json)
+    private function getCustomShippingJsonToArray($json, $address)
     {
-        $customOption = [
-            'code' => '',
-            'rate' => 0,
-            'type' => '',
-            'description' => ''
-        ];
+        $isJson = $this->_customShippingRateHelper->isJson($json);
+
+        //reload exist shipping cost if custom shipping method
+        if ($json && !$isJson) {
+            $jsonToArray = [
+                'code' => $json,
+                'type' => $this->_customShippingRateHelper->getShippingCodeFromMethod($json),
+                'rate' => $address->getShippingAmount()
+            ];
+
+            return $this->formatShippingArray($jsonToArray);
+        }
 
         $jsonToArray = (array)json_decode($json, true);
 
-        if (!$json || count($jsonToArray) != 4) {
-            $json = $this->getQuote()->getCustomShippingRateJson();
-
-            if ($json) {
-                $jsonToArray = (array)json_decode($json, true);
-            }
-        }
-
         if (is_array($jsonToArray) && count($jsonToArray) == 4) {
-            foreach ($jsonToArray as $key => $value) {
-                $customOption[$key] = $value;
-            }
-
-            $this->getQuote()->setCustomShippingRateJson($json);
-            return $customOption;
+            return $this->formatShippingArray($jsonToArray);
         }
 
         return false;
     }
 
     /**
-     * @param mixed $quote
-     * @return ShippingPlugin
+     * @param $jsonToArray array
+     * @return array
      */
-    public function setQuote($quote)
+    protected function formatShippingArray($jsonToArray)
     {
-        $this->_quote = $quote;
-        return $this;
-    }
+        $customShippingOption = [
+            'code' => '',
+            'rate' => 0,
+            'type' => '',
+            'description' => ''
+        ];
 
-    /**
-     * @return \Magento\Quote\Model\Quote
-     */
-    public function getQuote()
-    {
-        return $this->_quote;
+        foreach ((array) $jsonToArray as $key => $value) {
+            $customShippingOption[$key] = $value;
+        }
+
+        return $customShippingOption;
     }
 }

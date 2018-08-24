@@ -7,6 +7,8 @@
 
 namespace MagePal\CustomShippingRate\Block\Adminhtml\Order\Create\Shipping\Method;
 
+use MagePal\CustomShippingRate\Model\Carrier;
+
 class Form extends \Magento\Sales\Block\Adminhtml\Order\Create\Shipping\Method\Form
 {
     protected $activeMethodRate;
@@ -19,7 +21,7 @@ class Form extends \Magento\Sales\Block\Adminhtml\Order\Create\Shipping\Method\F
     public function getActiveCustomShippingRateMethod()
     {
         $rate = $this->getActiveMethodRate();
-        return $rate && $rate->getCarrier() == \MagePal\CustomShippingRate\Model\Carrier::CODE ? $rate->getMethod() : '';
+        return $rate && $rate->getCarrier() == Carrier::CODE ? $rate->getMethod() : '';
     }
 
     /**
@@ -44,7 +46,7 @@ class Form extends \Magento\Sales\Block\Adminhtml\Order\Create\Shipping\Method\F
             $this->activeMethodRate = $this->getActiveMethodRate();
         }
 
-        return $this->activeMethodRate && $this->activeMethodRate->getCarrier() == \MagePal\CustomShippingRate\Model\Carrier::CODE ? true : false;
+        return $this->activeMethodRate && $this->activeMethodRate->getCarrier() == Carrier::CODE ? true : false;
     }
 
     /**
@@ -56,14 +58,14 @@ class Form extends \Magento\Sales\Block\Adminhtml\Order\Create\Shipping\Method\F
     {
         $rates = $this->getShippingRates();
 
-        if (array_key_exists(\MagePal\CustomShippingRate\Model\Carrier::CODE, $rates)) {
+        if (array_key_exists(Carrier::CODE, $rates)) {
             if (!$this->isCustomShippingRateActive()) {
-                unset($rates[\MagePal\CustomShippingRate\Model\Carrier::CODE]);
+                unset($rates[Carrier::CODE]);
             } else {
                 $activeRateMethod = $this->getActiveCustomShippingRateMethod();
-                foreach ($rates[\MagePal\CustomShippingRate\Model\Carrier::CODE] as $key => $rate) {
+                foreach ($rates[Carrier::CODE] as $key => $rate) {
                     if ($rate->getMethod() != $activeRateMethod) {
-                        unset($rates[\MagePal\CustomShippingRate\Model\Carrier::CODE][$key]);
+                        unset($rates[Carrier::CODE][$key]);
                     }
                 }
             }

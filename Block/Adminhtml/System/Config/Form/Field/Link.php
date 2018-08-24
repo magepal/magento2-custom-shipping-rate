@@ -45,9 +45,9 @@ class Link extends \Magento\Config\Block\System\Config\Form\Field
     protected function _getElementHtml(\Magento\Framework\Data\Form\Element\AbstractElement $element)
     {
         return sprintf(
-            '<a href ="%s">%s</a>',
-                    $this->_urlBuilder->getUrl('adminhtml/system_config/edit/section/carriers'),
-                    __('Store > Configuration > Shipping Methods > Custom Shipping Rate')
+            '<a href ="%s#carriers_customshippingrate-link">%s</a>',
+            $this->_urlBuilder->getUrl('adminhtml/system_config/edit/section/carriers'),
+            __('Store > Configuration > Shipping Methods > Custom Shipping Rate')
         );
     }
 }

@@ -7,8 +7,19 @@
 
 namespace MagePal\CustomShippingRate\Helper;
 
+use Magento\Store\Model\ScopeInterface;
+use MagePal\CustomShippingRate\Model\Carrier;
+
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
+    /**
+     * @var array
+     */
+    protected $shippingType;
+
+    /**
+     * @var array
+     */
     protected $codes = [
         'code' => [
             'label' => 'Code',
@@ -32,6 +43,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         ]
     ];
 
+    /**
+     * @var array
+     */
     protected $headerTemplate;
 
     /**
@@ -39,28 +53,50 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getShippingType()
     {
-        $arrayValues = [];
-        $configData = $this->getConfigData('shipping_type');
+        if (!$this->shippingType) {
+            $arrayValues = [];
+            $configData = $this->getConfigData('shipping_type');
 
-        if (is_string($configData) && !empty($configData) && $configData !== '[]') {
-            if ($this->isJson($configData)) {
-                $arrayValues = (array) json_decode($configData, true);
-            } else {
-                $arrayValues = (array) array_values(unserialize($configData));
+            if (is_string($configData) && !empty($configData) && $configData !== '[]') {
+                if ($this->isJson($configData)) {
+                    $arrayValues = (array) json_decode($configData, true);
+                } else {
+                    $arrayValues = (array) array_values(unserialize($configData));
+                }
+            }
+
+            $arrayValues = $this->shippingArrayObject($arrayValues);
+
+            usort($arrayValues, function ($a, $b) {
+                if (array_key_exists('sort_order', $a)) {
+                    return $a['sort_order'] - $b['sort_order'];
+                } else {
+                    return 0;
+                }
+            });
+
+            $this->shippingType = $arrayValues;
+        }
+
+        return $this->shippingType;
+    }
+
+    /**
+     * input {code}_{method}
+     * return method
+     * @param $method_code
+     * @return string
+     */
+    public function getShippingCodeFromMethod($method_code)
+    {
+        foreach ($this->getShippingType() as $shippingType) {
+            if (Carrier::CODE . '_' . $shippingType['code'] == $method_code) {
+                return $shippingType['code'];
+                break;
             }
         }
 
-        $arrayValues = $this->shippingArrayObject($arrayValues);
-
-        usort($arrayValues, function ($a, $b) {
-            if (array_key_exists('sort_order', $a)) {
-                return $a['sort_order'] - $b['sort_order'];
-            } else {
-                return 0;
-            }
-        });
-
-        return $arrayValues;
+        return '';
     }
 
     /**
@@ -68,27 +104,20 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isEnabled()
     {
-        return (bool)$this->getConfigData('active');
+        return $this->scopeConfig->isSetFlag('carriers/' . Carrier::CODE . '/active');
     }
 
     /**
      * Retrieve information from carrier configuration
      *
      * @param   string $field
-     * @return  void|false|string
+     * @return  string
      */
     public function getConfigData($field)
     {
-        $code = \MagePal\CustomShippingRate\Model\Carrier::CODE;
-        if (empty($code)) {
-            return false;
-        }
-
-        $path = 'carriers/' . $code . '/' . $field;
-
         return $this->scopeConfig->getValue(
-            $path,
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            'carriers/' . Carrier::CODE . '/' . $field,
+            ScopeInterface::SCOPE_STORE
         );
     }
 
@@ -104,6 +133,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return (json_last_error() == JSON_ERROR_NONE);
     }
 
+    /**
+     * @return array
+     */
     public function getHeaderTemplate()
     {
         if (!$this->headerTemplate) {
@@ -135,7 +167,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $requiredFields = $this->getHeaderTemplate();
 
         if (is_array($values)) {
-            foreach ($values as $key => &$row) {
+            foreach ($values as &$row) {
                 $row = array_merge($requiredFields, $row);
             }
         }

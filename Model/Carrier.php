@@ -7,10 +7,20 @@
 
 namespace MagePal\CustomShippingRate\Model;
 
+use Magento\Backend\App\Area\FrontNameResolver;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\App\State;
 use Magento\Quote\Model\Quote\Address\RateRequest;
+use Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory;
+use Magento\Quote\Model\Quote\Address\RateResult\MethodFactory;
+use Magento\Shipping\Helper\Carrier as ShippingCarrierHelper;
 use Magento\Shipping\Model\Carrier\AbstractCarrier;
+use Magento\Shipping\Model\Carrier\CarrierInterface;
+use Magento\Shipping\Model\Rate\ResultFactory;
+use MagePal\CustomShippingRate\Helper\Data;
+use Psr\Log\LoggerInterface;
 
-class Carrier extends AbstractCarrier implements \Magento\Shipping\Model\Carrier\CarrierInterface
+class Carrier extends AbstractCarrier implements CarrierInterface
 {
     /**
      * Code of the carrier
@@ -28,14 +38,14 @@ class Carrier extends AbstractCarrier implements \Magento\Shipping\Model\Carrier
 
     /**
      *
-     * @var \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory
+     * @var MethodFactory
      */
     protected $_rateMethodFactory;
 
     /**
      * Carrier helper
      *
-     * @var \Magento\Shipping\Helper\Carrier
+     * @var ShippingCarrierHelper
      */
     protected $_carrierHelper;
 
@@ -45,35 +55,36 @@ class Carrier extends AbstractCarrier implements \Magento\Shipping\Model\Carrier
     protected $_rateFactory;
 
     /**
-     * @var \Magento\Framework\App\State
+     * @var State
      */
     protected $_state;
 
     /**
-     * @var \MagePal\CustomShippingRate\Helper\Data
+     * @var Data
      */
     protected $_customShippingRateHelper;
 
     /**
-     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-     * @param \Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory $rateErrorFactory
-     * @param \Psr\Log\LoggerInterface $logger
+     * @param ScopeConfigInterface $scopeConfig
+     * @param ErrorFactory $rateErrorFactory
+     * @param LoggerInterface $logger
+     * @param ResultFactory $rateFactory
+     * @param ShippingCarrierHelper $carrierHelper
+     * @param MethodFactory $rateMethodFactory
+     * @param State $state
+     * @param Data $customShippingRateHelper
      * @param array $data
-     * @param \Magento\Shipping\Model\Rate\ResultFactory $rateFactory
-     * @param \Magento\Shipping\Helper\Carrier $carrierHelper
-     * @param \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory $rateMethodFactory
-     *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
-        \Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory $rateErrorFactory,
-        \Psr\Log\LoggerInterface $logger,
-        \Magento\Shipping\Model\Rate\ResultFactory $rateFactory,
-        \Magento\Shipping\Helper\Carrier $carrierHelper,
-        \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory $rateMethodFactory,
-        \Magento\Framework\App\State $state,
-        \MagePal\CustomShippingRate\Helper\Data $customShippingRateHelper,
+        ScopeConfigInterface $scopeConfig,
+        ErrorFactory $rateErrorFactory,
+        LoggerInterface $logger,
+        ResultFactory $rateFactory,
+        ShippingCarrierHelper $carrierHelper,
+        MethodFactory $rateMethodFactory,
+        State $state,
+        Data $customShippingRateHelper,
         array $data = []
     ) {
         parent::__construct($scopeConfig, $rateErrorFactory, $logger, $data);
@@ -91,13 +102,14 @@ class Carrier extends AbstractCarrier implements \Magento\Shipping\Model\Carrier
      * Collect and get rates
      *
      * @param RateRequest $request
-     * @return \Magento\Quote\Model\Quote\Address\RateResult\Error|bool|Result
+     * @return \Magento\Catalog\Model\ResourceModel\Product\Collection|\Magento\Shipping\Model\Rate\Result
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function collectRates(RateRequest $request)
     {
         $result = $this->_rateFactory->create();
 
-        if (!$this->getConfigFlag('active') || ($this->_state->getAreaCode() != \Magento\Backend\App\Area\FrontNameResolver::AREA_CODE && !$this->getConfigFlag('show_on_frontend'))) {
+        if (!$this->getConfigFlag('active') || (!$this->isAdmin() && $this->hideShippingMethodOnFrontend())) {
             return $result;
         }
 
@@ -117,10 +129,10 @@ class Carrier extends AbstractCarrier implements \Magento\Shipping\Model\Carrier
     }
 
     /**
-    * Get allowed shipping methods
-    *
-    * @return array
-    */
+     * Get allowed shipping methods
+     *
+     * @return array
+     */
     public function getAllowedMethods()
     {
         return [$this->getCarrierCode() => __($this->getConfigData('name'))];
@@ -129,5 +141,23 @@ class Carrier extends AbstractCarrier implements \Magento\Shipping\Model\Carrier
     public function isTrackingAvailable()
     {
         return false;
+    }
+
+    /**
+     * @return bool
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    protected function hideShippingMethodOnFrontend()
+    {
+        return !$this->getConfigFlag('show_on_frontend');
+    }
+
+    /**
+     * @return bool
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    protected function isAdmin()
+    {
+        return $this->_state->getAreaCode() == FrontNameResolver::AREA_CODE;
     }
 }
