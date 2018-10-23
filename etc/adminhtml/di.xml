@@ -10,4 +10,7 @@
     <type name="Magento\Quote\Model\Quote\Address\Total\Shipping">
         <plugin name="MagePal_CustomShippingRate::ShippingPlugin" type="MagePal\CustomShippingRate\Plugin\Quote\Address\Total\ShippingPlugin" />
     </type>
+    <type name="Magento\Quote\Api\Data\AddressInterface">
+        <plugin sortOrder="1" name="magePalCustomShippingRateAddress" type="MagePal\CustomShippingRate\Plugin\Model\Quote\AddressPlugin"/>
+    </type>
 </config>

@@ -19,7 +19,7 @@ class ShippingPlugin
     /**
      * @var \MagePal\CustomShippingRate\Helper\Data
      */
-    protected $_customShippingRateHelper;
+    protected $customShippingRateHelper;
 
     /**
      * @param \MagePal\CustomShippingRate\Helper\Data $customShippingRateHelper
@@ -27,7 +27,7 @@ class ShippingPlugin
     public function __construct(
         \MagePal\CustomShippingRate\Helper\Data $customShippingRateHelper
     ) {
-        $this->_customShippingRateHelper = $customShippingRateHelper;
+        $this->customShippingRateHelper = $customShippingRateHelper;
     }
 
     /**
@@ -50,7 +50,7 @@ class ShippingPlugin
         $address = $shipping->getAddress();
         $method = $address->getShippingMethod();
 
-        if (!$this->_customShippingRateHelper->isEnabled()
+        if (!$this->customShippingRateHelper->isEnabled()
             || $address->getAddressType() != Address::ADDRESS_TYPE_SHIPPING
             || strpos($method, Carrier::CODE) === false
         ) {
@@ -99,13 +99,13 @@ class ShippingPlugin
      */
     private function getCustomShippingJsonToArray($json, $address)
     {
-        $isJson = $this->_customShippingRateHelper->isJson($json);
+        $isJson = $this->customShippingRateHelper->isJson($json);
 
         //reload exist shipping cost if custom shipping method
         if ($json && !$isJson) {
             $jsonToArray = [
                 'code' => $json,
-                'type' => $this->_customShippingRateHelper->getShippingCodeFromMethod($json),
+                'type' => $this->customShippingRateHelper->getShippingCodeFromMethod($json),
                 'rate' => $address->getShippingAmount()
             ];
 
