@@ -75,19 +75,15 @@ class ShippingPlugin
      */
     protected function updateCustomRate($address, $customShippingOption)
     {
-        foreach ($address->getAllShippingRates() as $rate) {
-            if ($rate->getCode() == $customShippingOption['code']) {
-                $cost = (float) $customShippingOption['rate'];
-                $description = trim($customShippingOption['description']);
+        if ($selectedRate = $this->getSelectedShippingRate($address, $customShippingOption['code'])) {
+            $cost = (float) $customShippingOption['rate'];
+            $description = trim($customShippingOption['description']);
 
-                $address->setShippingAmount($cost);
-                $rate->setPrice($cost);
-                //Empty by default. Use in third-party modules
-                if (!empty($description) || strlen($description) > 2) {
-                    $rate->setMethodTitle($description);
-                }
-
-                break;
+            $selectedRate->setPrice($cost);
+            $selectedRate->setCost($cost);
+            //Empty by default. Use in third-party modules
+            if (!empty($description) || strlen($description) > 2) {
+                $selectedRate->setMethodTitle($description);
             }
         }
     }
@@ -103,10 +99,15 @@ class ShippingPlugin
 
         //reload exist shipping cost if custom shipping method
         if ($json && !$isJson) {
+            $rate = 0;
+            if ($selectedRate = $this->getSelectedShippingRate($address, $json)) {
+                $rate = $selectedRate->getPrice();
+            }
+
             $jsonToArray = [
                 'code' => $json,
                 'type' => $this->customShippingRateHelper->getShippingCodeFromMethod($json),
-                'rate' => $address->getShippingAmount()
+                'rate' => $rate
             ];
 
             return $this->formatShippingArray($jsonToArray);
@@ -119,6 +120,27 @@ class ShippingPlugin
         }
 
         return false;
+    }
+
+    /**
+     * @param $address
+     * @param $code
+     * @return null | \Magento\Quote\Model\Quote\Address\Rate
+     */
+    protected function getSelectedShippingRate($address, $code)
+    {
+        $selectedRate = null;
+
+        if ($code) {
+            foreach ($address->getAllShippingRates() as $rate) {
+                if ($rate->getCode() == $code) {
+                    $selectedRate = $rate;
+                    break;
+                }
+            }
+        }
+
+        return $selectedRate;
     }
 
     /**

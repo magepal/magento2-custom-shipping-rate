@@ -17,7 +17,6 @@ class AddressPlugin
      */
     public function aroundCollectShippingRates(\Magento\Quote\Api\Data\AddressInterface $subject, callable $proceed)
     {
-
         $price = null;
         $description = null;
 
@@ -37,6 +36,7 @@ class AddressPlugin
             foreach ($subject->getAllShippingRates() as $rate) {
                 if ($rate->getCode() == $subject->getShippingMethod()) {
                     $rate->setPrice($price);
+                    $rate->setCost($price);
                     $rate->setMethodTitle($description);
                     break;
                 }
