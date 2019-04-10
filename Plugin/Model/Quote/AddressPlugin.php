@@ -7,15 +7,21 @@
 
 namespace MagePal\CustomShippingRate\Plugin\Model\Quote;
 
+use Magento\Quote\Api\Data\AddressInterface;
+
+/**
+ * Class AddressPlugin
+ * @package MagePal\CustomShippingRate\Plugin\Model\Quote
+ */
 class AddressPlugin
 {
 
     /**
-     * @param \Magento\Quote\Api\Data\AddressInterface $subject
+     * @param AddressInterface $subject
      * @param callable $proceed
      * @return mixed
      */
-    public function aroundCollectShippingRates(\Magento\Quote\Api\Data\AddressInterface $subject, callable $proceed)
+    public function aroundCollectShippingRates(AddressInterface $subject, callable $proceed)
     {
         $price = null;
         $description = null;

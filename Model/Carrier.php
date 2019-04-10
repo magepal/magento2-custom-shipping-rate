@@ -8,18 +8,26 @@
 namespace MagePal\CustomShippingRate\Model;
 
 use Magento\Backend\App\Area\FrontNameResolver;
+use Magento\Catalog\Model\ResourceModel\Product\Collection;
+use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\State;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Quote\Model\Quote\Address\RateRequest;
 use Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory;
 use Magento\Quote\Model\Quote\Address\RateResult\MethodFactory;
 use Magento\Shipping\Helper\Carrier as ShippingCarrierHelper;
 use Magento\Shipping\Model\Carrier\AbstractCarrier;
 use Magento\Shipping\Model\Carrier\CarrierInterface;
+use Magento\Shipping\Model\Rate\Result;
 use Magento\Shipping\Model\Rate\ResultFactory;
 use MagePal\CustomShippingRate\Helper\Data;
 use Psr\Log\LoggerInterface;
 
+/**
+ * Class Carrier
+ * @package MagePal\CustomShippingRate\Model
+ */
 class Carrier extends AbstractCarrier implements CarrierInterface
 {
     /**
@@ -50,7 +58,7 @@ class Carrier extends AbstractCarrier implements CarrierInterface
     protected $_carrierHelper;
 
     /**
-     * @var \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory
+     * @var CollectionFactory
      */
     protected $_rateFactory;
 
@@ -102,8 +110,8 @@ class Carrier extends AbstractCarrier implements CarrierInterface
      * Collect and get rates
      *
      * @param RateRequest $request
-     * @return \Magento\Catalog\Model\ResourceModel\Product\Collection|\Magento\Shipping\Model\Rate\Result
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @return Collection|Result
+     * @throws LocalizedException
      */
     public function collectRates(RateRequest $request)
     {
@@ -138,6 +146,9 @@ class Carrier extends AbstractCarrier implements CarrierInterface
         return [$this->getCarrierCode() => __($this->getConfigData('name'))];
     }
 
+    /**
+     * @return bool
+     */
     public function isTrackingAvailable()
     {
         return false;
@@ -145,7 +156,7 @@ class Carrier extends AbstractCarrier implements CarrierInterface
 
     /**
      * @return bool
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedException
      */
     protected function hideShippingMethodOnFrontend()
     {
@@ -154,7 +165,7 @@ class Carrier extends AbstractCarrier implements CarrierInterface
 
     /**
      * @return bool
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedException
      */
     protected function isAdmin()
     {

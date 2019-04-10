@@ -7,36 +7,51 @@
 
 namespace MagePal\CustomShippingRate\Block\Adminhtml\System\Config\Form\Composer;
 
-class Version extends \Magento\Config\Block\System\Config\Form\Field
+use Exception;
+use Magento\Backend\Block\Template\Context;
+use Magento\Config\Block\System\Config\Form\Field;
+use Magento\Framework\App\DeploymentConfig;
+use Magento\Framework\Component\ComponentRegistrar;
+use Magento\Framework\Component\ComponentRegistrarInterface;
+use Magento\Framework\Data\Form\Element\AbstractElement;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Filesystem\Directory\ReadFactory;
+use Magento\Framework\Phrase;
+
+/**
+ * Class Version
+ * @package MagePal\CustomShippingRate\Block\Adminhtml\System\Config\Form\Composer
+ */
+class Version extends Field
 {
 
     /**
-     * @var \Magento\Framework\App\DeploymentConfig
+     * @var DeploymentConfig
      */
     protected $deploymentConfig;
 
     /**
-     * @var \Magento\Framework\Component\ComponentRegistrarInterface
+     * @var ComponentRegistrarInterface
      */
     protected $componentRegistrar;
 
     /**
-     * @var \Magento\Framework\Filesystem\Directory\ReadFactory
+     * @var ReadFactory
      */
     protected $readFactory;
 
     /**
-     * @param \Magento\Backend\Block\Template\Context $context
-     * @param \Magento\Framework\App\DeploymentConfig $deploymentConfig
-     * @param \Magento\Framework\Component\ComponentRegistrarInterface $componentRegistrar
-     * @param \Magento\Framework\Filesystem\Directory\ReadFactory $readFactory
+     * @param Context $context
+     * @param DeploymentConfig $deploymentConfig
+     * @param ComponentRegistrarInterface $componentRegistrar
+     * @param ReadFactory $readFactory
      * @param array $data
      */
     public function __construct(
-        \Magento\Backend\Block\Template\Context $context,
-        \Magento\Framework\App\DeploymentConfig $deploymentConfig,
-        \Magento\Framework\Component\ComponentRegistrarInterface $componentRegistrar,
-        \Magento\Framework\Filesystem\Directory\ReadFactory $readFactory,
+        Context $context,
+        DeploymentConfig $deploymentConfig,
+        ComponentRegistrarInterface $componentRegistrar,
+        ReadFactory $readFactory,
         array $data = []
     ) {
         $this->deploymentConfig = $deploymentConfig;
@@ -48,11 +63,11 @@ class Version extends \Magento\Config\Block\System\Config\Form\Field
     /**
      * Render button
      *
-     * @param  \Magento\Framework\Data\Form\Element\AbstractElement $element
+     * @param  AbstractElement $element
      * @return string
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedException
      */
-    public function render(\Magento\Framework\Data\Form\Element\AbstractElement $element)
+    public function render(AbstractElement $element)
     {
         // Remove scope label
         $element->unsScope()->unsCanUseWebsiteValue()->unsCanUseDefaultValue();
@@ -62,11 +77,11 @@ class Version extends \Magento\Config\Block\System\Config\Form\Field
     /**
      * Return element html
      *
-     * @param  \Magento\Framework\Data\Form\Element\AbstractElement $element
+     * @param  AbstractElement $element
      * @return string
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    protected function _getElementHtml(\Magento\Framework\Data\Form\Element\AbstractElement $element)
+    protected function _getElementHtml(AbstractElement $element)
     {
         return 'v' . $this->getVersion();
     }
@@ -95,12 +110,12 @@ class Version extends \Magento\Config\Block\System\Config\Form\Field
      * Get module composer version
      *
      * @param $moduleName
-     * @return \Magento\Framework\Phrase|string|void
+     * @return Phrase|string|void
      */
     public function getComposerVersion($moduleName)
     {
         $path = $this->componentRegistrar->getPath(
-            \Magento\Framework\Component\ComponentRegistrar::MODULE,
+            ComponentRegistrar::MODULE,
             $moduleName
         );
 
@@ -112,7 +127,7 @@ class Version extends \Magento\Config\Block\System\Config\Form\Field
                 $data = json_decode($composerJsonData);
                 return !empty($data->version) ? $data->version : __('Unknown');
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             //
         }
 

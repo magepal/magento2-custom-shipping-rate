@@ -7,10 +7,15 @@
 
 namespace MagePal\CustomShippingRate\Helper;
 
+use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Store\Model\ScopeInterface;
 use MagePal\CustomShippingRate\Model\Carrier;
 
-class Data extends \Magento\Framework\App\Helper\AbstractHelper
+/**
+ * Class Data
+ * @package MagePal\CustomShippingRate\Helper
+ */
+class Data extends AbstractHelper
 {
     /**
      * @var array

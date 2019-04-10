@@ -9,23 +9,29 @@ namespace MagePal\CustomShippingRate\Plugin\Quote\Address\Total;
 
 use Magento\Quote\Api\Data\ShippingAssignmentInterface;
 use Magento\Quote\Model\Quote;
+use Magento\Quote\Model\Quote\Address;
+use Magento\Quote\Model\Quote\Address\Rate;
 use Magento\Quote\Model\Quote\Address\Total;
 use Magento\Quote\Model\Quote\Address\Total\Shipping;
-use \MagePal\CustomShippingRate\Model\Carrier;
-use \Magento\Quote\Model\Quote\Address;
+use MagePal\CustomShippingRate\Helper\Data;
+use MagePal\CustomShippingRate\Model\Carrier;
 
+/**
+ * Class ShippingPlugin
+ * @package MagePal\CustomShippingRate\Plugin\Quote\Address\Total
+ */
 class ShippingPlugin
 {
     /**
-     * @var \MagePal\CustomShippingRate\Helper\Data
+     * @var Data
      */
     protected $customShippingRateHelper;
 
     /**
-     * @param \MagePal\CustomShippingRate\Helper\Data $customShippingRateHelper
+     * @param Data $customShippingRateHelper
      */
     public function __construct(
-        \MagePal\CustomShippingRate\Helper\Data $customShippingRateHelper
+        Data $customShippingRateHelper
     ) {
         $this->customShippingRateHelper = $customShippingRateHelper;
     }
@@ -45,7 +51,6 @@ class ShippingPlugin
         ShippingAssignmentInterface $shippingAssignment,
         Total $total
     ) {
-
         $shipping = $shippingAssignment->getShipping();
         $address = $shipping->getAddress();
         $method = $address->getShippingMethod();
@@ -125,7 +130,7 @@ class ShippingPlugin
     /**
      * @param $address
      * @param $code
-     * @return null | \Magento\Quote\Model\Quote\Address\Rate
+     * @return null | Rate
      */
     protected function getSelectedShippingRate($address, $code)
     {

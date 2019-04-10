@@ -7,24 +7,30 @@
 
 namespace MagePal\CustomShippingRate\Block\Adminhtml\System\Config\Form\Field;
 
+use Magento\Backend\Block\Template\Context;
 use Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray;
+use MagePal\CustomShippingRate\Helper\Data;
 
 /**
- * Class Locations Backend system config array field renderer
+ * Class ShippingList
+ * @package MagePal\CustomShippingRate\Block\Adminhtml\System\Config\Form\Field
  */
 class ShippingList extends AbstractFieldArray
 {
+    /**
+     * @var Data
+     */
     protected $helper;
 
     /**
      * ShippingList constructor.
-     * @param \Magento\Backend\Block\Template\Context $context
-     * @param \MagePal\CustomShippingRate\Helper\Data $helperData
+     * @param Context $context
+     * @param Data $helperData
      * @param array $data
      */
     public function __construct(
-        \Magento\Backend\Block\Template\Context $context,
-        \MagePal\CustomShippingRate\Helper\Data $helperData,
+        Context $context,
+        Data $helperData,
         array $data = []
     ) {
         $this->helper = $helperData;
