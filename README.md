@@ -10,7 +10,7 @@ Our Magento 2 custom shipping method extension provides two essential functional
 Want to add order package tracking to your Magento store? Learn more about our [Order Shipment Tracking for Magento 2](https://www.magepal.com/order-shipment-tracking-for-magento-2.html) extension.
 
 ### Custom Shipping Rate for Admin Order
-Whether you are creating a new order or canceling and rewriting existing orders in Magento Admin, our admin shipping extension gives you the ability to apply a custom shipping rate, method, and description to any order. This free extension is essential for businesses that do a lot of phone orders or mail orders and want to offer special shipping cost for individual customers. With our admin shipping plugin extension changing shipping amount for a particular order is as easy as enter the shipping amount instead of choosing predefined standard shipping rates and invoice your customer as you would with any standard shipping rate.
+Whether you are creating a new order or canceling and rewriting existing orders in Magento Admin, our admin shipping extension gives you the ability to apply a custom shipping rate, method, and description to any order. This free extension is essential for businesses that do a lot of phone orders or mail orders and want to offer special shipping cost for individual customers. With our admin shipping plugin extension changing shipping amount for a particular order is as easy as entering the shipping amount instead of choosing predefined standard shipping rates and invoice your customer as you would with any standard shipping rate.
 
 ![Magento2 Custom Shippiing Rate Admin](https://image.ibb.co/ijTPtH/Custom_Shipping_Rate_for_Magento2_by_Magepal.gif)
 
@@ -20,7 +20,8 @@ Instead of using complex shipping table rates, our extension simplifies your che
 ![Magento2 Custom Shippiing Method Frontend](https://image.ibb.co/hjHHDH/Custom_Shipping_Rate_for_Magento2_frontend.png)
 
 ### How to Configure Magento Shipping Rate
-Setting up our shipping method is as simple as entering four options for your different rate.
+Setting up our shipping method is as simple as 
+ing four options for your different rate.
 
 ![Magento2 Custom Shippiing price Configuration](https://user-images.githubusercontent.com/1415141/38053884-457a6ba6-32a3-11e8-86bd-97245b7a0356.png)
 
