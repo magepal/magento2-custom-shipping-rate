@@ -7,7 +7,7 @@
 
 Our Magento 2 custom shipping method extension provides two essential functionality for Magento store owner to fully take control of there store shipping options by providing the ability to quickly add custom shipping rates to both admin order creation or frontend customer.
 
-Want to add FedEx, UPS, USPS or DHL order package tracking to your Magento store? Learn more about our [Order Package Tracking for Magento 2](https://www.magepal.com/order-shipment-tracking-for-magento-2.html) extension.
+Want to add FedEx, UPS, USPS or DHL order package tracking to your Magento store? Learn more about our [Order Package Tracking for Magento 2](https://www.magepal.com/order-shipment-tracking-for-magento-2.html) extension. Improve your average customer acquisition cost by upselling more products and services to each customer.
 
 ### Custom Shipping Rate for Admin Order
 Whether you are creating a new order or canceling and rewriting existing orders in Magento Admin, our admin shipping extension gives you the ability to apply a custom shipping rate, method, and description to any order. This free extension is essential for businesses that do a lot of phone orders or mail orders and want to offer special shipping cost for individual customers. With our admin shipping plugin extension changing shipping amount for a particular order is as easy as entering the shipping amount instead of choosing predefined standard shipping rates and invoice your customer as you would with any standard shipping rate.
