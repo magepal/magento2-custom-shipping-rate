@@ -20,10 +20,39 @@
                 <attribute type="expanded">1</attribute>
                 <comment>
                     <![CDATA[
-                    <strong>Copyright © 2018 <a href="http://bit.ly/MPEXCSR" target="_blank">www.magepal.com</a> / <a href="mailto:support@magepal.com">support@magepal.com</a></strong><br />
-                    Discover other must have extensions at <a href="http://bit.ly/MPEXCSR" target="_blank">www.magepal.com</a>. Thanks for choosing MagePal Extensions.<br/><br/>
+                    <div id="magepal-info">
+                        Copyright © 2019 <a href="https://www.magepal.com/magento2/extensions.html?utm_source=cataloglazyload&utm_medium=admin" target="_blank">MagePal, LLC</a>
+                        <a href="https://www.magepal.com/help/docs/magento-lazy-load-images/?utm_source=cataloglazyload&utm_medium=admin#documentation" target="_blank">Documentation</a>
+                        <a href="https://www.magepal.com/help/docs/magento-lazy-load-images/?utm_source=cataloglazyload&utm_medium=admin#support">Support</a>
+                        <a href="https://www.magepal.com/help/docs/magento-lazy-load-images/?utm_source=cataloglazyload&utm_medium=admin#current_version" target="_blank">Latest Version</a>
+                        <a href="https://www.magepal.com/lazy-load.html?utm_source=cataloglazyload&utm_medium=admin" target="_blank">Extension Detail</a>
+                        <a href="https://www.magepal.com/magento2/extensions.html?utm_source=cataloglazyload&utm_medium=admin" target="_blank">More Extensions</a>
+                    </div>
+                    <div id="magepal-promo">
+                        Want to add FedEx, UPS, USPS or DHL order package tracking to your Magento store? Learn more about our
+                        <a href="https://www.magepal.com/order-shipment-tracking-for-magento-2.html"  target="_blank">Order Package Tracking for Magento 2</a> extension.
+                        Improve your average customer acquisition cost by up-selling more products and services to each customer.
+                    </div>
                     <hr style="border-top: 1px solid #e3e3e3" />
-                  ]]>
+                    <style>
+                        #magepal-info a {
+                            font-weight: bold;
+                            border-left: 2px solid #e3e3e3;
+                            padding-left:10px;
+                            padding-right:10px;
+                            color: #ef7e1e;
+                        }
+
+                        #magepal-info a:first-child {
+                            padding-left: 5px;
+                            border-left: none;
+                        }
+
+                        #magepal-info {
+                            padding-bottom: 5px;
+                        }
+                     </style>
+                ]]>
                 </comment>
                 <field id="module_version" translate="label" type="label" sortOrder="0" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Module Version</label>
@@ -42,6 +71,50 @@
         <section id="carriers">
             <group id="customshippingrate" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>MagePal Custom Shipping Rate</label>
+                <comment>
+                    <![CDATA[
+                    <div id="magepal-info">
+                        Copyright © 2019 <a href="https://www.magepal.com/magento2/extensions.html?utm_source=custom-shipping&utm_medium=admin" target="_blank">MagePal, LLC</a>
+                        <a href="https://www.magepal.com/help/docs/configure-custom-shipping-methods-magento-2/?utm_source=custom-shipping&utm_medium=admin#documentation" target="_blank">Documentation</a>
+                        <a href="https://www.magepal.com/help/docs/configure-custom-shipping-methods-magento-2/?utm_source=custom-shipping&utm_medium=admin#support">Support</a>
+                        <a href="https://www.magepal.com/help/docs/configure-custom-shipping-methods-magento-2/?utm_source=custom-shipping&utm_medium=admin#current_version" target="_blank">Latest Version</a>
+                        <a href="https://www.magepal.com/custom-shipping-rates-for-magento-2.html?utm_source=custom-shipping&utm_medium=admin" target="_blank">Extension Detail</a>
+                        <a href="https://www.magepal.com/magento2/extensions.html?utm_source=custom-shipping&utm_medium=admin" target="_blank">More Extensions</a>
+                    </div>
+                    <div id="magepal-promo">
+                        Want to add FedEx, UPS, USPS or DHL order package tracking to your Magento store? Learn more about our
+                        <a href="https://www.magepal.com/order-shipment-tracking-for-magento-2.html"  target="_blank">Order Package Tracking for Magento 2</a> extension.
+                        Improve your average customer acquisition cost by up-selling more products and services to each customer.
+                    </div>
+                    <hr style="border-top: 1px solid #e3e3e3" />
+                    <style>
+                        #magepal-info a {
+                            font-weight: bold;
+                            border-left: 2px solid #e3e3e3;
+                            padding-left:10px;
+                            padding-right:10px;
+                            color: #ef7e1e;
+                        }
+
+                        #magepal-info a:first-child {
+                            padding-left: 5px;
+                            border-left: none;
+                        }
+
+                        #magepal-info {
+                            padding-bottom: 5px;
+                        }
+                     </style>
+                ]]>
+                </comment>
+                <field id="module_version" translate="label" type="label" sortOrder="0" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Module Version</label>
+                    <frontend_model>MagePal\CustomShippingRate\Block\Adminhtml\System\Config\Form\Module\Version</frontend_model>
+                </field>
+                <field id="composer_version" translate="label" type="label" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Composer Version</label>
+                    <frontend_model>MagePal\CustomShippingRate\Block\Adminhtml\System\Config\Form\Composer\Version</frontend_model>
+                </field>
                 <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Enabled for Admin Checkout</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
