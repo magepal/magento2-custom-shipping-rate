@@ -42,9 +42,9 @@ class ArraySerialized extends \Magento\Config\Model\Config\Backend\Serialized\Ar
         Registry $registry,
         ScopeConfigInterface $config,
         TypeListInterface $cacheTypeList,
+        Data $helperData,
         AbstractResource $resource = null,
         AbstractDb $resourceCollection = null,
-        Data $helperData,
         array $data = []
     ) {
         parent::__construct(
