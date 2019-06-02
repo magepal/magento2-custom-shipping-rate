@@ -1,13 +1,18 @@
 <a href="http://www.magepal.com" title="Magento Extension App Store"><img src="https://image.ibb.co/dHBkYH/Magepal_logo.png" width="100" align="right" alt="MagePal - Magento Extension MarketPlace" /></a>
 
-## Custom Shipping Rate for Magento2
+# Custom Flat Fee Shipping Rates for Magento2
 
 [![Total Downloads](https://poser.pugx.org/magepal/magento2-customshippingrate/downloads)](https://packagist.org/packages/magepal/magento2-customshippingrate)
 [![Latest Stable Version](https://poser.pugx.org/magepal/magento2-customshippingrate/v/stable)](https://packagist.org/packages/magepal/magento2-customshippingrate)
 
-Our Magento 2 custom shipping method extension provides two essential functionality for Magento store owner to fully take control of there store shipping options by providing the ability to quickly add custom shipping rates to both admin order creation or frontend customer. So weather your are using United States Postal Services, United Parcel Service, Federal Express, DHL or any other carriers, our Magento2 shipping extension make it easy to quickly create flat fee shipping rates.
 
-### New Package Tracking Extension
+As a Magento merchant completing with other major brands, providing simple flat rate shipping is essential to your business success. Our Magento 2 custom flat shipping method extension adds two essential functionality to your Magento store which gives you fully take control your store shipping options by providing the ability to quickly add custom flat fee shipping rates to both admin order creation or display a simple list of flat rates to your website customers. So whether you are using United States Postal Services, United Parcel Service, Federal Express, DHL or any other carriers, our Magento2 shipping extension makes it easy for you to quickly add simple flat rate shipping fees to your Magento site.
+
+
+### Custom Shipping Rate for Admin Order
+Whether you are creating a new order or canceling and rewriting existing orders in Magento Admin, our admin shipping extension gives you the ability to apply a custom shipping rate, method, and description to any order. This free extension is essential for businesses that do a lot of phone orders or mail orders and want to offer special shipping cost for individual customers. With our admin shipping plugin extension changing shipping amount for a particular order is as easy as entering the shipping amount instead of choosing predefined standard shipping rates and invoice your customer as you would with any standard shipping rate.
+
+### Order Package Tracking
 Want to add FedEx, UPS, USPS or DHL order package tracking to your Magento store? Learn more about our [Order Package Tracking for Magento 2](https://www.magepal.com/order-shipment-tracking-for-magento-2.html) extension. Improve your average customer acquisition cost by upselling more products and services to each customer.
 
 ### Custom Shipping Rate for Admin Order
@@ -25,31 +30,21 @@ Setting up our shipping method is as simple as entering four options for your di
 
 ![Magento2 Custom Shippiing price Configuration](https://user-images.githubusercontent.com/1415141/38053884-457a6ba6-32a3-11e8-86bd-97245b7a0356.png)
 
-## Installation
 
-#### Step 1 
+## Documentation
+
+ - [How to Install Custom Flat Fee Shipping Rates for Magento2](https://www.magepal.com/help/docs/configure-custom-shipping-methods-magento-2/#installation)
+
+ - [How to Setup Custom Shipping Rates for Magento2](https://www.magepal.com/help/docs/configure-custom-shipping-methods-magento-2/#configuration)
+ 
+
+## Installation
 
 ##### Using Composer (recommended)
 
 ```
 composer require magepal/magento2-customshippingrate
 ```
-
-##### Manual Installation (not recommended)
-To install Custom Shipping Rate for Magento2
- * Download the extension
- * Unzip the file
- * Create a folder {Magento root}/app/code/MagePal/CustomShippingRate
- * Copy the content from the unzip folder
-
-
-#### Step 2 -  Enable Custom Shipping Rate
- * php -f bin/magento module:enable --clear-static-content MagePal_CustomShippingRate
- * php -f bin/magento setup:upgrade
-
-#### Step 3 - How to Configure Custom Shipping Rate
-Log into your Magento Admin, then goto Stores -> Configuration -> Sales -> Shipping Methods -> Custom Shipping Rate
-
 
 Contribution
 ---
