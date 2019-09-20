@@ -55,7 +55,7 @@ class ShippingPlugin
         $address = $shipping->getAddress();
         $method = $address->getShippingMethod();
 
-        if (!$this->customShippingRateHelper->isEnabled()
+        if (!$this->customShippingRateHelper->isEnabled($quote->getStore()->getStoreId())
             || $address->getAddressType() != Address::ADDRESS_TYPE_SHIPPING
             || strpos($method, Carrier::CODE) === false
         ) {
