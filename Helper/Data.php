@@ -105,11 +105,12 @@ class Data extends AbstractHelper
     }
 
     /**
+     * @param  null|string $storeId
      * @return bool
      */
-    public function isEnabled()
+    public function isEnabled($storeId = null)
     {
-        return $this->scopeConfig->isSetFlag('carriers/' . Carrier::CODE . '/active');
+        return $this->scopeConfig->isSetFlag('carriers/' . Carrier::CODE . '/active', ScopeInterface::SCOPE_STORE, $storeId);
     }
 
     /**

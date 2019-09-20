@@ -116,7 +116,7 @@
                     <frontend_model>MagePal\CustomShippingRate\Block\Adminhtml\System\Config\Form\Composer\Version</frontend_model>
                 </field>
                 <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Enabled for Admin Checkout</label>
+                    <label>Enabled for Admin Checkout, is checked against quote store</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="show_on_frontend" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">

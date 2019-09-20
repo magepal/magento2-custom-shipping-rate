@@ -51,7 +51,7 @@
             </dd>
         <?php endforeach; ?>
             <?php /*------- Start MagePal --------*/ ?>
-            <?php if ($this->helper('MagePal\CustomShippingRate\Helper\Data')->isEnabled()): ?>
+            <?php if ($this->helper('MagePal\CustomShippingRate\Helper\Data')->isEnabled($this->getQuote()->getStore()->getStoreId())): ?>
                 <dt class="admin__order-shipment-methods-title">
                     <hr/>
                 </dt>
