@@ -31,14 +31,14 @@ Setting up our shipping method is as simple as entering four options for your di
 ![Magento2 Custom Shippiing price Configuration](https://user-images.githubusercontent.com/1415141/38053884-457a6ba6-32a3-11e8-86bd-97245b7a0356.png)
 
 
-## Documentation
+### Documentation
 
  - [How to Install Custom Flat Fee Shipping Rates for Magento2](https://www.magepal.com/help/docs/configure-custom-shipping-methods-magento-2/#installation)
 
  - [How to Setup Custom Shipping Rates for Magento2](https://www.magepal.com/help/docs/configure-custom-shipping-methods-magento-2/#configuration)
  
 
-## Installation
+### Installation
 
 ##### Using Composer (recommended)
 
