@@ -75,4 +75,4 @@ Magento 2 Extensions
 - [Order Confirmation Page Miscellaneous Scripts](https://www.magepal.com/magento2/extensions/order-confirmation-miscellaneous-scripts-for-magento-2.html)
 - [HTML Minifier for Magento2](https://www.magepal.com/magento2/extensions/html-minifier.html)
 
-© MagePal LLC. | [www.magepal.com](http:/www.magepal.com)
+© MagePal LLC. | [www.magepal.com](https://www.magepal.com)
