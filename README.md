@@ -5,9 +5,9 @@
 [![Total Downloads](https://poser.pugx.org/magepal/magento2-customshippingrate/downloads)](https://packagist.org/packages/magepal/magento2-customshippingrate)
 [![Latest Stable Version](https://poser.pugx.org/magepal/magento2-customshippingrate/v/stable)](https://packagist.org/packages/magepal/magento2-customshippingrate)
 
+<a href="https://www.magepal.com/magento2/extensions/shipping.html" ><img alt="Magento Shipping Extensions" src="https://user-images.githubusercontent.com/1415141/109374323-86591a00-7882-11eb-82c1-b5bb58ca77fe.png" /></a>
 
 As a Magento merchant completing with other major brands, providing simple flat rate shipping is essential to your business success. Our Magento 2 custom flat shipping method extension adds two essential functionality to your Magento store which gives you fully take control your store shipping options by providing the ability to quickly add custom flat fee shipping rates to both admin order creation or display a simple list of flat rates to your website customers. So whether you are using United States Postal Services, United Parcel Service, Federal Express, DHL or any other carriers, our Magento2 shipping extension makes it easy for you to quickly add simple flat rate shipping fees to your Magento site.
-
 
 ### Custom Shipping Rate for Admin Order
 Whether you are creating a new order or canceling and rewriting existing orders in Magento Admin, our admin shipping extension gives you the ability to apply a custom shipping rate, method, and description to any order. This free extension is essential for businesses that do a lot of phone orders or mail orders and want to offer special shipping cost for individual customers. With our admin shipping plugin extension changing shipping amount for a particular order is as easy as entering the shipping amount instead of choosing predefined standard shipping rates and invoice your customer as you would with any standard shipping rate.

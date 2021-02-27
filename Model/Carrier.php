@@ -24,10 +24,6 @@ use Magento\Shipping\Model\Rate\ResultFactory;
 use MagePal\CustomShippingRate\Helper\Data;
 use Psr\Log\LoggerInterface;
 
-/**
- * Class Carrier
- * @package MagePal\CustomShippingRate\Model
- */
 class Carrier extends AbstractCarrier implements CarrierInterface
 {
     /**
@@ -121,7 +117,7 @@ class Carrier extends AbstractCarrier implements CarrierInterface
             return $result;
         }
 
-        foreach ($this->_customShippingRateHelper->getShippingType() as $shippingType) {
+        foreach ($this->_customShippingRateHelper->getShippingType($request->getStoreId()) as $shippingType) {
             $rate = $this->_rateMethodFactory->create();
             $rate->setCarrier($this->_code);
             $rate->setCarrierTitle($this->getConfigData('title'));

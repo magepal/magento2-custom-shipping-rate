@@ -65,7 +65,7 @@
 
                                 <select id="custom-shipment-title" class="admin__control-select required-entry">
                                     <!--option>-- please choose --</option-->
-                                    <?php foreach ($this->helper('MagePal\CustomShippingRate\Helper\Data')->getShippingType() as $shippingType) :?>
+                                    <?php foreach ($this->helper('MagePal\CustomShippingRate\Helper\Data')->getShippingType($this->getQuote()->getStore()->getStoreId()) as $shippingType) :?>
                                         <option value="<?php echo $shippingType['code'] ?>" <?php echo $block->getActiveCustomShippingRateMethod() == $shippingType['code'] ? ' selected' : '' ?>>
                                             <?php echo __($shippingType['title']); ?>
                                         </option>

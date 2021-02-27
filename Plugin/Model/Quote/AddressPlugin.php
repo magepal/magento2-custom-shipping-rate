@@ -9,10 +9,6 @@ namespace MagePal\CustomShippingRate\Plugin\Model\Quote;
 
 use Magento\Quote\Api\Data\AddressInterface;
 
-/**
- * Class AddressPlugin
- * @package MagePal\CustomShippingRate\Plugin\Model\Quote
- */
 class AddressPlugin
 {
 

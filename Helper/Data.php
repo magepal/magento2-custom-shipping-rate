@@ -11,10 +11,6 @@ use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Store\Model\ScopeInterface;
 use MagePal\CustomShippingRate\Model\Carrier;
 
-/**
- * Class Data
- * @package MagePal\CustomShippingRate\Helper
- */
 class Data extends AbstractHelper
 {
     /**
@@ -54,13 +50,14 @@ class Data extends AbstractHelper
     protected $headerTemplate;
 
     /**
+     * @param null $storeId
      * @return array|mixed
      */
-    public function getShippingType()
+    public function getShippingType($storeId = null)
     {
         if (!$this->shippingType) {
             $arrayValues = [];
-            $configData = $this->getConfigData('shipping_type');
+            $configData = $this->getConfigData('shipping_type', $storeId);
 
             if (is_string($configData) && !empty($configData) && $configData !== '[]') {
                 if ($this->isJson($configData)) {
@@ -90,18 +87,21 @@ class Data extends AbstractHelper
      * input {code}_{method}
      * return method
      * @param $method_code
+     * @param null $storeId
      * @return string
      */
-    public function getShippingCodeFromMethod($method_code)
+    public function getShippingCodeFromMethod($method_code, $storeId = null)
     {
-        foreach ($this->getShippingType() as $shippingType) {
+        $result = '';
+
+        foreach ($this->getShippingType($storeId) as $shippingType) {
             if (Carrier::CODE . '_' . $shippingType['code'] == $method_code) {
-                return $shippingType['code'];
+                $result = $shippingType['code'];
                 break;
             }
         }
 
-        return '';
+        return $result;
     }
 
     /**
@@ -110,20 +110,26 @@ class Data extends AbstractHelper
      */
     public function isEnabled($storeId = null)
     {
-        return $this->scopeConfig->isSetFlag('carriers/' . Carrier::CODE . '/active', ScopeInterface::SCOPE_STORE, $storeId);
+        return $this->scopeConfig->isSetFlag(
+            'carriers/' . Carrier::CODE . '/active',
+            ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
     }
 
     /**
      * Retrieve information from carrier configuration
      *
-     * @param   string $field
+     * @param string $field
+     * @param null $storeId
      * @return  string
      */
-    public function getConfigData($field)
+    public function getConfigData($field, $storeId = null)
     {
         return $this->scopeConfig->getValue(
             'carriers/' . Carrier::CODE . '/' . $field,
-            ScopeInterface::SCOPE_STORE
+            ScopeInterface::SCOPE_STORE,
+            $storeId
         );
     }
 

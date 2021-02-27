@@ -16,10 +16,6 @@ use Magento\Quote\Model\Quote\Address\Total\Shipping;
 use MagePal\CustomShippingRate\Helper\Data;
 use MagePal\CustomShippingRate\Model\Carrier;
 
-/**
- * Class ShippingPlugin
- * @package MagePal\CustomShippingRate\Plugin\Quote\Address\Total
- */
 class ShippingPlugin
 {
     /**
@@ -54,15 +50,16 @@ class ShippingPlugin
         $shipping = $shippingAssignment->getShipping();
         $address = $shipping->getAddress();
         $method = $address->getShippingMethod();
+        $storeId = $quote->getStoreId();
 
-        if (!$this->customShippingRateHelper->isEnabled($quote->getStore()->getStoreId())
+        if (!$this->customShippingRateHelper->isEnabled($storeId)
             || $address->getAddressType() != Address::ADDRESS_TYPE_SHIPPING
             || strpos($method, Carrier::CODE) === false
         ) {
             return $proceed($quote, $shippingAssignment, $total);
         }
 
-        $customShippingOption = $this->getCustomShippingJsonToArray($method, $address);
+        $customShippingOption = $this->getCustomShippingJsonToArray($method, $address, $storeId);
 
         if ($customShippingOption && strpos($method, $customShippingOption['code']) !== false) {
             //update shipping code
@@ -96,9 +93,10 @@ class ShippingPlugin
     /**
      * @param $json
      * @param $address
+     * @param null $storeId
      * @return array|bool
      */
-    private function getCustomShippingJsonToArray($json, $address)
+    private function getCustomShippingJsonToArray($json, $address, $storeId = null)
     {
         $isJson = $this->customShippingRateHelper->isJson($json);
 
@@ -111,7 +109,7 @@ class ShippingPlugin
 
             $jsonToArray = [
                 'code' => $json,
-                'type' => $this->customShippingRateHelper->getShippingCodeFromMethod($json),
+                'type' => $this->customShippingRateHelper->getShippingCodeFromMethod($json, $storeId),
                 'rate' => $rate
             ];
 
