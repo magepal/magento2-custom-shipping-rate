@@ -54,14 +54,14 @@ class ShippingPlugin
 
         if (!$this->customShippingRateHelper->isEnabled($storeId)
             || $address->getAddressType() != Address::ADDRESS_TYPE_SHIPPING
-            || strpos($method, Carrier::CODE) === false
+            || strpos((string) $method, Carrier::CODE) === false
         ) {
             return $proceed($quote, $shippingAssignment, $total);
         }
 
         $customShippingOption = $this->getCustomShippingJsonToArray($method, $address, $storeId);
 
-        if ($customShippingOption && strpos($method, $customShippingOption['code']) !== false) {
+        if ($customShippingOption && strpos((string) $method, $customShippingOption['code']) !== false) {
             //update shipping code
             $shipping->setMethod($customShippingOption['code']);
             $address->setShippingMethod($customShippingOption['code']);
