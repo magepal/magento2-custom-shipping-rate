@@ -19,12 +19,14 @@ class AddressPlugin
      */
     public function aroundCollectShippingRates(AddressInterface $subject, callable $proceed)
     {
+        $found = false;
         $price = null;
         $description = null;
 
         //get custom shipping rate set by admin
         foreach ($subject->getAllShippingRates() as $rate) {
             if ($rate->getCode() == $subject->getShippingMethod()) {
+                $found = true;
                 $price = $rate->getPrice();
                 $description = $rate->getMethodTitle();
                 break;
@@ -33,7 +35,7 @@ class AddressPlugin
 
         $return = $proceed();
 
-        if ($price !== null) {
+        if ($found) {
             //reset custom shipping rate
             foreach ($subject->getAllShippingRates() as $rate) {
                 if ($rate->getCode() == $subject->getShippingMethod()) {
