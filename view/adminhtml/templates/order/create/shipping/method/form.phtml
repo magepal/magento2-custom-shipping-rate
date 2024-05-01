@@ -88,8 +88,8 @@ $taxHelper = $block->getData('taxHelper');
                                     <?php endforeach; ?>
                                 </select>
                                 <input id="custom-shipment-rate" type="text" style="width:75px; padding:3px;" placeholder="9.99" value="<?php echo $block->getActiveCustomShippingRatePrice() ?>" class="input-text item-price required-entry" />
-                                <button id="custom-shipping-button" type="button" class="scalable "
-                                        onclick="order.setShippingMethod(getCustomShippingCost())" ><span><?= __('Set') ?></span></button>
+
+                                <?= $block->getButtonHtml(__('Set'), 'order.setShippingMethod(getCustomShippingCost())', 'scalable') ?>
                             </p>
 
                         </li>
