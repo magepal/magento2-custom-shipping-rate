@@ -1,4 +1,4 @@
-<a href="http://www.magepal.com" title="Magento Extension App Store"><img src="https://image.ibb.co/dHBkYH/Magepal_logo.png" width="100" align="right" alt="MagePal - Magento Extension MarketPlace" /></a>
+<a href="https://www.magepal.com" title="Magento Extension App Store"><img src="https://image.ibb.co/dHBkYH/Magepal_logo.png" width="100" align="right" alt="MagePal - Magento Extension MarketPlace" /></a>
 
 # Custom Flat Fee Shipping Rates for Magento2 / Adobe Commerce
 
