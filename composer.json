@@ -18,7 +18,7 @@
         "free shipping"
     ],
     "type": "magento2-module",
-    "version": "1.8.2",
+    "version": "1.8.3",
     "license": [
         "proprietary"
     ],
@@ -36,7 +36,7 @@
         }
     ],
     "require": {
-        "php": "~8.1.0|~8.2.0|~8.3.0",
+        "php": "~8.1.0|~8.2.0|~8.3.0|~8.4.0",
         "magento/module-backend": "102.0.*",
         "magento/framework": "103.0.*",
         "magepal/magento2-core": ">=1.1.10"
