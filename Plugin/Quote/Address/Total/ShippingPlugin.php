@@ -54,14 +54,14 @@ class ShippingPlugin
 
         if (!$this->customShippingRateHelper->isEnabled($storeId)
             || $address->getAddressType() != Address::ADDRESS_TYPE_SHIPPING
-            || strpos((string) $method, Carrier::CODE) === false
+            || !str_contains((string) $method, Carrier::CODE)
         ) {
             return $proceed($quote, $shippingAssignment, $total);
         }
 
         $customShippingOption = $this->getCustomShippingJsonToArray($method, $address, $storeId);
 
-        if ($customShippingOption && strpos((string) $method, $customShippingOption['code']) !== false) {
+        if ($customShippingOption && str_contains((string) $method, (string) $customShippingOption['code'])) {
             //update shipping code
             $shipping->setMethod($customShippingOption['code']);
             $address->setShippingMethod($customShippingOption['code']);
@@ -79,7 +79,7 @@ class ShippingPlugin
     {
         if ($selectedRate = $this->getSelectedShippingRate($address, $customShippingOption['code'])) {
             $cost = (float) $customShippingOption['rate'];
-            $description = trim($customShippingOption['description']);
+            $description = trim((string) $customShippingOption['description']);
 
             $selectedRate->setPrice($cost);
             $selectedRate->setCost($cost);
@@ -116,7 +116,7 @@ class ShippingPlugin
             return $this->formatShippingArray($jsonToArray);
         }
 
-        $jsonToArray = (array)json_decode($json, true);
+        $jsonToArray = (array)json_decode((string) $json, true);
 
         if (is_array($jsonToArray) && count($jsonToArray) == 4) {
             return $this->formatShippingArray($jsonToArray);
