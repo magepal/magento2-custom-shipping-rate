@@ -13,6 +13,7 @@ use Magento\Framework\Data\Collection\AbstractDb;
 use Magento\Framework\Model\Context;
 use Magento\Framework\Model\ResourceModel\AbstractResource;
 use Magento\Framework\Registry;
+use Magento\Framework\Serialize\Serializer\Json;
 use MagePal\CustomShippingRate\Helper\Data;
 
 /**
@@ -32,10 +33,11 @@ class ArraySerialized extends \Magento\Config\Model\Config\Backend\Serialized\Ar
      * @param Registry $registry
      * @param ScopeConfigInterface $config
      * @param TypeListInterface $cacheTypeList
+     * @param Data $helperData
      * @param AbstractResource|null $resource
      * @param AbstractDb|null $resourceCollection
-     * @param Data $helperData
      * @param array $data
+     * @param Json|null $serializer
      */
     public function __construct(
         Context $context,
@@ -43,9 +45,10 @@ class ArraySerialized extends \Magento\Config\Model\Config\Backend\Serialized\Ar
         ScopeConfigInterface $config,
         TypeListInterface $cacheTypeList,
         Data $helperData,
-        AbstractResource $resource = null,
-        AbstractDb $resourceCollection = null,
-        array $data = []
+        ?AbstractResource $resource = null,
+        ?AbstractDb $resourceCollection = null,
+        array $data = [],
+        ?Json $serializer = null
     ) {
         parent::__construct(
             $context,
@@ -54,7 +57,8 @@ class ArraySerialized extends \Magento\Config\Model\Config\Backend\Serialized\Ar
             $cacheTypeList,
             $resource,
             $resourceCollection,
-            $data
+            $data,
+            $serializer
         );
 
         $this->helper = $helperData;
